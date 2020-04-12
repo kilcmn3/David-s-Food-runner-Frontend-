@@ -1,7 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class RestaurantCard extends Component {
-  render() {
-    return <div></div>;
-  }
+const RestaurantCard = (props) => {
+  const { index, name, address, contact, email } = props.restaurant
+
+  return (
+    <div className="restaurant card" key={index}>
+      <ul>
+        Restaurant Name: {name}
+        <li>address: {address}</li>
+        <li>contact: {contact}</li>
+        <li>emailL: {email}</li>
+      </ul>
+    </div>
+  );
+
 }
+export default RestaurantCard
