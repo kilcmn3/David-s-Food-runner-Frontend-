@@ -10,13 +10,18 @@ export default class RestaurantsListContainer extends Component {
     }
   }
   componentDidMount() {
-    requests.fetchRestaurants().then(restaurants => console.log(restaurants))
+    requests.fetchRestaurants().then(restaurants => this.setState({ restaurants }))
+  }
+  renderRestaurants = () => {
+    return this.state.restaurants.map((restaurant, index) => {
+      return <RestaurantCard key={index} restaurant={restaurant} />
+    })
   }
   render() {
     return (
-      <div>
+      <div className="restaurant list container">
         <h3>RestaurantsListContainer</h3>
-        <RestaurantCard />
+        {this.renderRestaurants()}
       </div>
     );
   }
