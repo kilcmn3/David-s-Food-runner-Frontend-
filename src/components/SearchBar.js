@@ -1,7 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class SearchBar extends Component {
-  render() {
-    return <div></div>;
-  }
+const SearchBar = (props) => {
+
+  return (<div className="search bar" >
+    <form onSubmit={props.handleSubmit}>
+      <input type="text" onChange={props.handleChange} placeholder="Search..." />
+      <input type="submit" value="🔍" />
+    </form>
+  </div>
+  )
 }
+
+
+export default SearchBar
