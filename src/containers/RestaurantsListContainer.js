@@ -1,26 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import RestaurantCard from '../components/RestaurantCard';
+import * as requests from './requests'
 
-
-const RestaurantsListContainer = (props) => {
-
-  const renderRestaurants = () => {
-    if (!props.restaurants || props.restaurants.length === 0) {
+export default class RestaurantsListContainer extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      restaurants: []
+    }
+  }
+  // componentDidMount() {
+  //   requests.fetchRestaurants().then(restaurants => this.setState({ restaurants }))
+  // }
+  renderRestaurants = () => {
+    const { searchDatas } = this.props
+    if (!searchDatas || searchDatas.length === 0) {
       return null
-    } else if (props.restaurant.length >= 1) {
-      return props.restaurants.map((restaurant, index) => {
+    } else if (searchDatas.length >= 1) {
+      return searchDatas.map((restaurant, index) => {
+        debugger
         return <RestaurantCard key={index} restaurant={restaurant} />
       })
     }
   }
 
-  return (
-    <div className="restaurant list container">
-      <h3>RestaurantsListContainer</h3>
-      {renderRestaurants()}
-    </div>
-  );
+  render() {
+    return (
+      <div className="restaurant list container" >
+        <h3>RestaurantsListContainer</h3>
 
+        {this.renderRestaurants()}
+      </div >
+    );
+  }
 }
-
-export default RestaurantsListContainer

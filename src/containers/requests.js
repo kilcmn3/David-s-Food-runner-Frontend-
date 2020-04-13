@@ -7,7 +7,7 @@ const parseData = (response) => {
     if (response.ok) {
         response.json();
     }
-    throw new Error("500")
+    throw new Error("something is wrong")
 }
 // error handler
 const catchError = (error) => console.log(`%c${error}`, 'color: red;');
