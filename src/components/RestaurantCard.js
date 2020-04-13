@@ -5,12 +5,12 @@ const RestaurantCard = (props) => {
 
   return (
     <div className="restaurant card" key={index}>
-      <ul>
+      {/* <ul>
         Restaurant Name: {name}
         <li>address: {address}</li>
         <li>contact: {contact}</li>
         <li>emailL: {email}</li>
-      </ul>
+      </ul> */}
     </div>
   );
 
