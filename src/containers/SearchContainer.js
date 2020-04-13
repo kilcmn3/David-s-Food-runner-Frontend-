@@ -8,7 +8,8 @@ export default class SearchContainer extends Component {
   constructor() {
     super()
     this.state = {
-      search: ""
+      search: "",
+      searchDatas: []
     }
   }
   handleChange = (event) => {
@@ -18,14 +19,14 @@ export default class SearchContainer extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
 
-    requests.searchRestaurants(this.state.search)
+    requests.searchRestaurants(this.state.search).then(searchDatas => console.log(searchDatas))
   }
   render() {
     return (
       <div className='searchContainer'>
         <h2>SearchContainer</h2>
         <SearchBar handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-        <RestaurantsListContainer search={this.state.search} restaurants={this.props.restaurants} />
+        <RestaurantsListContainer search={this.state.search} searchItem={this.state.searchDatas} />
       </div>
     );
   }
