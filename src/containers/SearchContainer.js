@@ -19,14 +19,14 @@ export default class SearchContainer extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
 
-    requests.searchRestaurants(this.state.search).then(searchDatas => console.log(searchDatas))
+    requests.searchRestaurants(this.state.search).then(searchDatas => this.setState({ searchDatas }))
   }
   render() {
     return (
       <div className='searchContainer'>
         <h2>SearchContainer</h2>
         <SearchBar handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-        <RestaurantsListContainer search={this.state.search} searchItem={this.state.searchDatas} />
+        <RestaurantsListContainer search={this.state.search} searchDatas={this.state.searchDatas} />
       </div>
     );
   }
