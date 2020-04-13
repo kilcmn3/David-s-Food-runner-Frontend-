@@ -20,5 +20,5 @@ export const fetchRestaurants = () =>
     fetch(restaurantsURL).then(parseData).catch(catchError);
 
 export const searchRestaurants = (data) =>
-    fetch(restaurantsURL + "/search" + `?q=${data}`).then(parseData).catch(catchError);
+    fetch(restaurantsURL + "/search" + `?q=${data}`).then(response => response.json()).catch(catchError);
 // TODO: define a few more kaiju fetches

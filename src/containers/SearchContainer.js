@@ -19,8 +19,7 @@ export default class SearchContainer extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
 
-    requests.searchRestaurants(this.state.search)
-      .then(searchDatas => this.setState({ searchDatas }))
+    requests.searchRestaurants(this.state.search).then(searchDatas => console.log(searchDatas))
   }
   render() {
     return (

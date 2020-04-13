@@ -14,6 +14,7 @@ export default class RestaurantsListContainer extends Component {
   // }
   renderRestaurants = () => {
     const { searchDatas } = this.props
+
     if (!searchDatas || searchDatas.length === 0) {
       return null
     } else if (searchDatas.length >= 1) {
