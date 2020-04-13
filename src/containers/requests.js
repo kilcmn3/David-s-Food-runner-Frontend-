@@ -3,7 +3,12 @@
 // urls
 const restaurantsURL = 'http://localhost:4000/restaurants';
 // parse incoming data
-const parseData = (response) => response.json();
+const parseData = (response) => {
+    if (response.ok) {
+        response.json();
+    }
+    throw new Error("500")
+}
 // error handler
 const catchError = (error) => console.log(`%c${error}`, 'color: red;');
 
