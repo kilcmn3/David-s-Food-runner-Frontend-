@@ -15,6 +15,9 @@ export const fetchRestaurants = () =>
 export const searchRestaurants = (data) =>
     fetch(restaurantsURL + `/search?q=${data}`).then(parseData).catch(catchError);
 
+export const fetchComments = (data) =>
+    fetch(restaurantsURL + `/${data}`).then(parseData).catch(catchError);
+
 export const postComments = (comment) => {
     return fetch(commentsURL, {
         method: "POST",
