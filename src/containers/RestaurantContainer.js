@@ -1,23 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReviewContainer from './ReviewContainer'
+import * as requests from './requests'
 
-const RestaurantContainer = (props) => {
-  const { photos, name, location, categories, phone } = props.location.state.restaurant
-  let parselocation = JSON.parse(location)
-  const address = parselocation.address1 + ", " + parselocation.city + ' ' + parselocation.state + " " + parselocation.zip_code
+export default class RestaurantContainer extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      restaurant: [],
+      stage: false
+    }
+  }
 
-  return (<div className="restaurant container">
-    <div className="restaaurant info">
-      <img src={photos} alt="" />
-      <p>Name: {name}</p>
-      <p>Address: {address}</p>
-      <p>Phone: {phone}</p>
-      <p>category: {categories[0]}</p>
+  //TODO fetch right direction
+  componentDidMount() {
+    let id = this.props.match.params.id
+    console.log(id)
+    requests.fetchOneRest(id).then(restaurant => this.setState({ restaurant, stage: !this.state.stage }))
+  }
+  renderRestaurant = () => {
+    if (this.state.stage) {
+      const { photos, name, location, categories, phone } = this.state.restaurant
+      let parseLocation = JSON.parse(location)
+      let alias = JSON.parse(categories[0])["alias"]
+      const address = parseLocation.address1 + ", " + parseLocation.city + ' ' + parseLocation.state + " " + parseLocation.zip_code
 
+      return (
+        <div className="restaaurant info">
+          <img src={photos} alt="" />
+          <p>Name: {name}</p>
+          <p>Address: {address}</p>
+          <p>Phone: {phone}</p>
+          <p>category: {alias}</p>
+        </div>
+      )
+    } else {
+      return null
+    }
+
+  }
+  render() {
+    return (<div className="restaurant container">
+      {this.renderRestaurant()}
+      <ReviewContainer restaurant={this.state.restaurant} />
     </div>
-    <ReviewContainer restaurant={props.location.state.restaurant} />
-  </div>
-  )
+    )
+  }
 }
-
-export default RestaurantContainer

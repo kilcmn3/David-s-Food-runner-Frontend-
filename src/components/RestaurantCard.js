@@ -5,19 +5,19 @@ export default class RestaurantCard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      url: null
+      redirect: false
     }
   }
 
-
   handleClick = () => {
-    this.setState({ url: '/restaurant' })
+    this.setState({ redirect: !this.state.redirect })
   }
   renderReviewContainer = () => {
-    if (this.state.url) {
+    let id = this.props.restaurant.id
+
+    if (this.state.redirect) {
       return (<Redirect to={{
-        pathname: this.state.url,
-        state: { restaurant: this.props.restaurant }
+        pathname: `/restaurants/${id}`
       }} />)
     } else {
       return null
