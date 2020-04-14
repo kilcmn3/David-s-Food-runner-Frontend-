@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { LogInContainer, MainContainer, NavBar } from './exportComponents';
+import { LogInContainer, MainContainer, NavBar, RestaurantContainer } from './exportComponents';
 
 function App() {
   return (
@@ -8,6 +8,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route path='/login' component={LogInContainer} />
+        <Route path='/restaurant/' component={RestaurantContainer} />
         <Route path='/' component={MainContainer} />
       </Switch>
     </div>
