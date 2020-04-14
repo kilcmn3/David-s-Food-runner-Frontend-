@@ -9,6 +9,7 @@ const ReviewCard = (props) => {
         <li>
           {comment}
         </li>
+        <button onClick={props.handleClick}>Delete</button>
       </ul>
     </div>
   )

@@ -17,17 +17,18 @@ export default class RestaurantsListContainer extends Component {
   }
 
   renderRestaurants = () => {
-    // const { searchDatas } = this.props
+    const { searchDatas } = this.props
+    const { startIndex, restaurants } = this.state
+    let copyDatas
 
-    // if (!searchDatas || searchDatas.length === 0) {
-    //   return null
-    // } else if (searchDatas.length >= 1) {
-    //   let copyDatas = this.props.searchDatas.slice(this.state.startIndex, this.state.startIndex + 5)
-    //   return copyDatas.map((restaurant, index) => {
-    //     return <RestaurantCard key={index} restaurant={restaurant} />
-    //   })
-    // }
-    return this.state.restaurants.map((restaurant, index) => {
+    if (!searchDatas || searchDatas.length === 0) {
+      copyDatas = restaurants
+    } else if (searchDatas.length >= 1) {
+      copyDatas = searchDatas
+    }
+
+    let slicedDatas = copyDatas.slice(startIndex, startIndex + 5)
+    return slicedDatas.map((restaurant, index) => {
       return <RestaurantCard key={index} restaurant={restaurant} />
     })
   }

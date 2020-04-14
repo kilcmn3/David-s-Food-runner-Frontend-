@@ -16,11 +16,15 @@ export default class ReviewListContainer extends Component {
   renderComment = () => {
     if (this.state.comments.length > 0) {
       return this.state.comments.map((comment, index) => {
-        return <ReviewCard key={index} comment={comment} />
+        return <ReviewCard key={index} comment={comment} handleClick={this.handleClick} />
       })
     } else {
       return null
     }
+  }
+  handleClick = () => {
+    //delete comment and database
+    console.log("delete te post!")
   }
   render() {
     return <div className="ReviewListContainer">

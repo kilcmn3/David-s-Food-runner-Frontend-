@@ -14,7 +14,7 @@ export default class SearchContainer extends Component {
   handleChange = (event) => {
     this.setState({ search: event.target.value })
   }
-  //TODO: fetch searched item.
+
   handleSubmit = (event) => {
     event.preventDefault()
 
