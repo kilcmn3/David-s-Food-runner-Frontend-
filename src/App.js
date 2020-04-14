@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { LogInContainer, MainContainer, NavBar, RestaurantContainer } from './exportComponents';
+import './App.css';
 
 function App() {
   return (

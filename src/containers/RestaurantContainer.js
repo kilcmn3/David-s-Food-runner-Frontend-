@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 
 export default class RestaurantContainer extends Component {
+  renderFrom = () => {
+    return "rednering form"
+  }
   render() {
-    console.log("Resss???")
+    console.log(this.props.location.state.restaurant)
+    const { photos } = this.props.location.state.restaurant
+
     return <div className="restaurant container">
-      Only RestaurantContainer
+      <img src={photos} alt="" />
     </div>;
   }
 }

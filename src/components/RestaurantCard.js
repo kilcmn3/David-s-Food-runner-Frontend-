@@ -12,7 +12,10 @@ const RestaurantCard = (props) => {
   }
   const renderRedirect = () => {
     if (toRedirect) {
-      return <Redirect to="/restaurant" />
+      return <Redirect to={{
+        pathname: '/restaurant',
+        state: { restaurant: props.restaurant }
+      }} />
     }
   }
   return (
