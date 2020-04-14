@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ReviewListContainer, ReviewForm } from '../exportComponents'
 
-export default class ReviewContainer extends Component {
-  render() {
-    return <div className="review container">
-      <ReviewForm />
+const ReviewContainer = (props) => {
+
+  return (
+    <div className="review container">
+      <ReviewForm restaurant={props.restaurant} />
       <ReviewListContainer />
-    </div>;
-  }
+    </div>
+  )
 }
+
+export default ReviewContainer

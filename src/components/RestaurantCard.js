@@ -14,7 +14,6 @@ export default class RestaurantCard extends Component {
     this.setState({ url: '/restaurant' })
   }
   renderReviewContainer = () => {
-    console.log(this.state.url)
     if (this.state.url) {
       return (<Redirect to={{
         pathname: this.state.url,
