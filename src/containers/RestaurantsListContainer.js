@@ -15,10 +15,6 @@ export default class RestaurantsListContainer extends Component {
       requests.fetchRestaurants().then(restaurants => this.setState({ restaurants }))
     }
   }
-  handleScroll = (event) => {
-    console.log(event.target)
-    debugger
-  }
 
   renderRestaurants = () => {
     // const { searchDatas } = this.props
@@ -38,7 +34,7 @@ export default class RestaurantsListContainer extends Component {
 
   render() {
     return (
-      <div className="restaurant list container" onScroll={this.handleScroll} >
+      <div className="restaurant list container" >
         <h3>RestaurantsListContainer</h3>
 
         {this.renderRestaurants()}
