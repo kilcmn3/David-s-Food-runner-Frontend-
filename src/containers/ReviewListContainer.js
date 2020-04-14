@@ -11,8 +11,7 @@ export default class ReviewListContainer extends Component {
     }
   }
   componentDidMount() {
-    const { id } = this.props.restaurant
-    requests.fetchComments(id).then(comments => this.setState(comments))
+    requests.fetchOneRest(this.props.restaurantID).then(restaurant => this.setState({ comments: restaurant.comments }))
   }
   renderComment = () => {
     if (this.state.comments.length > 0) {

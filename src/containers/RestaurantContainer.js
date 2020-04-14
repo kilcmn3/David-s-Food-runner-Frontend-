@@ -14,7 +14,6 @@ export default class RestaurantContainer extends Component {
   //TODO fetch right direction
   componentDidMount() {
     let id = this.props.match.params.id
-    console.log(id)
     requests.fetchOneRest(id).then(restaurant => this.setState({ restaurant, stage: !this.state.stage }))
   }
   renderRestaurant = () => {
@@ -41,7 +40,7 @@ export default class RestaurantContainer extends Component {
   render() {
     return (<div className="restaurant container">
       {this.renderRestaurant()}
-      <ReviewContainer restaurant={this.state.restaurant} />
+      <ReviewContainer restaurantID={this.props.match.params.id} />
     </div>
     )
   }

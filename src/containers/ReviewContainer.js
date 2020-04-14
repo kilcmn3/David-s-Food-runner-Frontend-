@@ -6,7 +6,7 @@ const ReviewContainer = (props) => {
   return (
     <div className="review container">
       <ReviewForm restaurant={props.restaurant} />
-      <ReviewListContainer restaurant={props.restaurant} />
+      <ReviewListContainer restaurantID={props.restaurantID} />
     </div>
   )
 }
