@@ -9,7 +9,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route path='/login' component={LogInContainer} />
-        <Route path='/restaurant/' component={RestaurantContainer} />
+        <Route path='/restaurants/:id' component={RestaurantContainer} />
         <Route path='/' component={MainContainer} />
       </Switch>
     </div>
