@@ -3,12 +3,7 @@
 // urls
 const restaurantsURL = 'http://localhost:4000/restaurants';
 // parse incoming data
-const parseData = (response) => {
-    if (response.ok) {
-        response.json();
-    }
-    throw new Error("something is wrong")
-}
+const parseData = (response) => response.json()
 // error handler
 const catchError = (error) => console.log(`%c${error}`, 'color: red;');
 
@@ -20,5 +15,5 @@ export const fetchRestaurants = () =>
     fetch(restaurantsURL).then(parseData).catch(catchError);
 
 export const searchRestaurants = (data) =>
-    fetch(restaurantsURL + "/search" + `?q=${data}`).then(response => response.json()).catch(catchError);
+    fetch(restaurantsURL + `/search?q=${data}`).then(parseData).catch(catchError);
 // TODO: define a few more kaiju fetches

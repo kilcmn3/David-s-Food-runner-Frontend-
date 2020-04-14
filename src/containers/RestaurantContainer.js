@@ -1,7 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
+import ReviewContainer from './ReviewContainer'
 
-export default class RestaurantContainer extends Component {
-  render() {
-    return <div></div>;
-  }
+const RestaurantContainer = (props) => {
+  const { photos } = props.location.state.restaurant
+
+  return (<div className="restaurant container">
+    <img src={photos} alt="" />
+    <ReviewContainer />
+  </div>
+  )
 }
+
+export default RestaurantContainer

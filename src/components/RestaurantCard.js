@@ -1,19 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
 
-const RestaurantCard = (props) => {
-  const { index, name, phone, location } = props.restaurant
-  const address = location.address1 + ", " + location.city + ' ' + location.state + " " + location.zip_code
+export default class RestaurantCard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      url: null
+    }
+  }
 
 
-  return (
-    <div className="restaurant card" key={index} onClick >
-      <ul>
-        Restaurant Name: {name}
-        <li>address: {address}</li>
-        <li>phone: {phone}</li>
-      </ul>
-    </div>
-  );
-
+  handleClick = () => {
+    this.setState({ url: '/restaurant' })
+  }
+  renderReviewContainer = () => {
+    console.log(this.state.url)
+    if (this.state.url) {
+      return (<Redirect to={{
+        pathname: this.state.url,
+        state: { restaurant: this.props.restaurant }
+      }} />)
+    } else {
+      return null
+    }
+  }
+  render() {
+    const { index, name, phone, location } = this.props.restaurant
+    const address = location.address1 + ", " + location.city + ' ' + location.state + " " + location.zip_code
+    return (
+      <div className="restaurant card" key={index} onClick={this.handleClick} >
+        {this.renderReviewContainer()}
+        <ul>
+          Restaurant Name: {name}
+          <li>address: {address}</li>
+          <li>phone: {phone}</li>
+        </ul>
+      </div>
+    )
+  }
 }
-export default RestaurantCard

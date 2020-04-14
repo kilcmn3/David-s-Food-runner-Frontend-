@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import RestaurantsListContainer from '../containers/RestaurantsListContainer'
 import SearchBar from '../components/SearchBar'
-import { Route } from 'react-router-dom'
 import * as requests from './requests'
 
 export default class SearchContainer extends Component {
