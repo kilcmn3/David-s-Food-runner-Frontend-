@@ -9,7 +9,7 @@ export default class ReviewForm extends Component {
   }
   handleSubmit = (event) => {
     event.preventDefault()
-    //post with user_id, and  restaurnat_id
+
     let datas = {
       comment: this.state.comment,
       user_id: 1,
