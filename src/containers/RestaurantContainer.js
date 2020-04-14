@@ -6,7 +6,7 @@ const RestaurantContainer = (props) => {
 
   return (<div className="restaurant container">
     <img src={photos} alt="" />
-    <ReviewContainer />
+    <ReviewContainer restaurant={props.location.state.restaurant} />
   </div>
   )
 }

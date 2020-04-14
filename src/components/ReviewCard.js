@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class ReviewCard extends Component {
-  render() {
-    return <div className="review card">
-      ReviewCard
-    </div>;
-  }
+const ReviewCard = () => {
+
+  return (
+    <div className="review card">
+
+    </div>
+  )
 }
+
+export default ReviewCard
