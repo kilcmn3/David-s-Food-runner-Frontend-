@@ -1,26 +1,39 @@
 import React from 'react';
-import { Formik } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import * as requests from '../containers/requests'
+
+const bcrypt = require('bcryptjs');
+const saltRounds = 10;
 
 const SignUp = () => (
   <Formik
-    initialValues={{ email: "", password: "" }}
+    initialValues={{
+      email: "", password: "", confirmPassword: ""
+    }}
+
     onSubmit={(values, { setSubmitting }) => {
+      //feth here
       setTimeout(() => {
         console.log("Logging in", values);
         setSubmitting(false);
       }, 500);
     }}
 
-    validationSchema={Yup.object().shape({
-      email: Yup.string()
-        .email()
-        .required("Required"),
-      password: Yup.string()
-        .required("No password provided.")
-        .min(8, "Password is too short - should be 8 chars minimum.")
-        .matches(/(?=.*[0-9])/, "Password must contain a number.")
-    })}
+    validationSchema={
+      Yup.object().shape({
+        email: Yup.string()
+          .email()
+          .required("Required"),
+        password: Yup.string()
+          .required("No password provided.")
+          .min(8, "Password is too short - should be 8 chars minimum.")
+          .matches(/(?=.*[0-9])/, "Password must contain a number."),
+        confirmPassword: Yup.string()
+          .oneOf([Yup.ref('password'), null], 'Passwords must match')
+          .required('Confirm Password is required')
+      })
+    }
   >
     {props => {
       const {
@@ -62,16 +75,16 @@ const SignUp = () => (
           )}
           <label htmlFor="email">Confirm Password</label>
           <input
-            name="password"
+            name="confirmPassword"
             type="password"
             placeholder="Enter your password"
-            value={values.password}
+            value={values.confirmPassword}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={errors.password && touched.password && "error"}
+            className={errors.confirmPassword && touched.confirmPassword && "error"}
           />
-          {errors.password && touched.password && (
-            <div className="input-feedback">{errors.password}</div>
+          {errors.confirmPassword && touched.confirmPassword && (
+            <div className="input-feedback">{errors.confirmPassword}</div>
           )}
           <button type="submit" disabled={isSubmitting}>
             Login
@@ -79,7 +92,7 @@ const SignUp = () => (
         </form>
       );
     }}
-  </Formik>
+  </Formik >
 )
 
 export default SignUp
