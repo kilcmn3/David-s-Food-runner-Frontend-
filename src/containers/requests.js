@@ -17,6 +17,9 @@ export const fetchRestaurants = () =>
 export const fetchOneRest = (id) =>
     fetch(restaurantsURL + `/${id}`).then(parseData).catch(catchError);
 
+export const fetchUser = (email) =>
+    fetch(usersURL + `/login?q=${email}`)
+
 export const postUsers = (users) => {
     return fetch(usersURL, {
         method: "POST",

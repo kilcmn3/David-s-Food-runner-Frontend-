@@ -24,7 +24,7 @@ const SignUp = (props) => (
             if (response.status >= 500) {
               alert("Somone is using the email. Please use different one")
             } else if (response.status === 200) {
-              return props.history.replace("/login");
+              return props.history.replace("/");
             }
           })
       })

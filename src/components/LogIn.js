@@ -2,16 +2,37 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import * as requests from '../containers/requests'
 import SignUp from './SignUp'
 
-const LogIn = () => (
+const bcrypt = require('bcryptjs');
+const saltRounds = 10;
+
+const LogIn = (props) => (
   <Formik
     initialValues={{ email: "", password: "" }}
     onSubmit={(values, { setSubmitting }) => {
-      setTimeout(() => {
-        console.log("Logging in", values);
-        setSubmitting(false);
-      }, 500);
+
+      setSubmitting(false);
+
+      bcrypt.hash(values.password, saltRounds, function (err, hash) {
+        requests.fetchUser(values.email)
+          .then(response => {
+            if (response.status >= 500) {
+              alert("Couldn't find your account")
+            } else if (response.status === 200) {
+              return response.json()
+            }
+          })
+          .then(email => {
+            if (bcrypt.compareSync(values.password, email.password)) {
+              return props.history.replace("/main");
+            } else {
+              alert("Email or Password is wrong")
+            }
+          })
+      })
+
     }}
 
     validationSchema={Yup.object().shape({
@@ -20,8 +41,6 @@ const LogIn = () => (
         .required("Required"),
       password: Yup.string()
         .required("No password provided.")
-        .min(8, "Password is too short - should be 8 chars minimum.")
-        .matches(/(?=.*[0-9])/, "Password must contain a number.")
     })}
   >
     {props => {
