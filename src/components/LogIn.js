@@ -18,6 +18,7 @@ const LogIn = (props) => (
       bcrypt.hash(values.password, saltRounds, function (err, hash) {
         requests.fetchUser(values.email)
           .then(response => {
+            debugger
             if (response.status >= 500) {
               alert("Couldn't find your account")
             } else if (response.status === 200) {

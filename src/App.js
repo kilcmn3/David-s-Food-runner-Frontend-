@@ -1,17 +1,30 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { MainContainer, RestaurantContainer, SignUp, LogIn, Profile } from './exportComponents';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { MainContainer, RestaurantContainer, LogInContainer } from './exportComponents';
 import './App.css';
 
-function App() {
+const App = () => {
+  const checkAuth = () => {
+    // const token = localStorage.getItem("userId")
+  }
+
+  // const AuthRoute = () => (
+  //   <Route render={() => (
+  //     checkAuth() ? (
+  //       <Redirect to={{ pathname: '/main' }} />
+  //     ) : (
+  //         <Redirect to={{ pathname: '/login' }} />
+  //       )
+  //   )} />
+  // )
+
   return (
     <div className='app'>
       <Switch>
-        <Route path="/signup" component={SignUp} />
-        <Route path="/profile" component={Profile} />
         <Route path='/restaurants/:id' component={RestaurantContainer} />
-        <Route path='/main' component={MainContainer} />
-        <Route path="/" component={LogIn} />
+        <Route path='/login-signup' component={LogInContainer} />
+        <Route path='/' component={LogInContainer} />
+        {/* <AuthRoute exact path='/' component={MainContainer} /> */}
       </Switch>
     </div>
   );
