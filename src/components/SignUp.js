@@ -1,23 +1,33 @@
 import React from 'react';
-import { Formik, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import * as requests from '../containers/requests'
+import { Redirect } from 'react-router-dom';
 
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
-const SignUp = () => (
+
+const SignUp = (props) => (
   <Formik
     initialValues={{
       email: "", password: "", confirmPassword: ""
     }}
 
     onSubmit={(values, { setSubmitting }) => {
-      //feth here
-      setTimeout(() => {
-        console.log("Logging in", values);
-        setSubmitting(false);
-      }, 500);
+
+      setSubmitting(false);
+
+      bcrypt.hash(values.password, saltRounds, function (err, hash) {
+        requests.postUsers({ email: values.email, password: hash })
+          .then(response => {
+            if (response.status >= 500) {
+              alert("Somone is using the email. Please use different one")
+            } else if (response.status === 200) {
+              return props.history.replace("/login");
+            }
+          })
+      })
     }}
 
     validationSchema={
@@ -87,7 +97,7 @@ const SignUp = () => (
             <div className="input-feedback">{errors.confirmPassword}</div>
           )}
           <button type="submit" disabled={isSubmitting}>
-            Login
+            Submit
         </button>
         </form>
       );
