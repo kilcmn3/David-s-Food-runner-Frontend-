@@ -6,26 +6,28 @@ export default class RestaurantContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      restaurant: [],
-      stage: false
+      comment: "",
+      comments: [],
+      restaurant: {}
     }
   }
 
-  //TODO fetch right direction
   componentDidMount() {
     let id = this.props.match.params.id
-    console.log(id)
-    requests.fetchOneRest(id).then(restaurant => this.setState({ restaurant, stage: !this.state.stage }))
+    requests.fetchOneRest(id).then(restaurant => {
+      let newComments = restaurant.comments.map(target => target.comment)
+      this.setState({ comments: newComments, restaurant: restaurant })
+    })
   }
   renderRestaurant = () => {
-    if (this.state.stage) {
+    if (this.state.restaurant.id) {
       const { photos, name, location, categories, phone } = this.state.restaurant
       let parseLocation = JSON.parse(location)
       let alias = JSON.parse(categories[0])["alias"]
       const address = parseLocation.address1 + ", " + parseLocation.city + ' ' + parseLocation.state + " " + parseLocation.zip_code
 
       return (
-        <div className="restaaurant info">
+        <div className="restaurant info">
           <img src={photos} alt="" />
           <p>Name: {name}</p>
           <p>Address: {address}</p>
@@ -36,12 +38,33 @@ export default class RestaurantContainer extends Component {
     } else {
       return null
     }
-
   }
+
+  handleChange = (event) => {
+    this.setState({ comment: event.target.value })
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault()
+
+    let datas = {
+      comment: this.state.comment,
+      user_id: 1,
+      restaurant_id: this.state.restaurant.id
+    }
+    requests.postComments(datas).then(() => this.setState({ comments: [...this.state.comments, this.state.comment], comment: "" }))
+  }
+
+  handleClick = () => {
+    //delete comment and database
+    console.log("delete te post!")
+  }
+
   render() {
+    // console.log(this.state.comments)
     return (<div className="restaurant container">
       {this.renderRestaurant()}
-      <ReviewContainer restaurant={this.state.restaurant} />
+      <ReviewContainer comments={this.state.comments} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleClick={this.handleClick} />
     </div>
     )
   }
