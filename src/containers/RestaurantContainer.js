@@ -27,7 +27,7 @@ export default class RestaurantContainer extends Component {
       const address = parseLocation.address1 + ", " + parseLocation.city + ' ' + parseLocation.state + " " + parseLocation.zip_code
 
       return (
-        <div className="restaaurant info">
+        <div className="restaurant info">
           <img src={photos} alt="" />
           <p>Name: {name}</p>
           <p>Address: {address}</p>
