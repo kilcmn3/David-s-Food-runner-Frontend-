@@ -52,7 +52,9 @@ export default class RestaurantContainer extends Component {
       user_id: 1,
       restaurant_id: this.state.restaurant.id
     }
-    requests.postComments(datas).then(() => this.setState({ comments: [...this.state.comments, this.state.comment], comment: "" }))
+    requests.postComments(datas)
+      .then(response => response.json())
+      .then((data) => this.setState({ comments: [...this.state.comments, data], comment: "" }))
   }
 
   handleClick = () => {

@@ -7,11 +7,11 @@ function App() {
   return (
     <div className='app'>
       <Switch>
-        <Route path="/login" component={LogIn} />
         <Route path="/signup" component={SignUp} />
         <Route path="/profile" component={Profile} />
         <Route path='/restaurants/:id' component={RestaurantContainer} />
-        <Route path='/' component={MainContainer} />
+        <Route path='/main' component={MainContainer} />
+        <Route path="/" component={LogIn} />
       </Switch>
     </div>
   );
