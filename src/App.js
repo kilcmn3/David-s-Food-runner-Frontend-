@@ -1,14 +1,15 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { LogInContainer, MainContainer, NavBar, RestaurantContainer } from './exportComponents';
+import { MainContainer, RestaurantContainer, SignUp, LogIn, Profile } from './exportComponents';
 import './App.css';
 
 function App() {
   return (
     <div className='app'>
-      <NavBar />
       <Switch>
-        <Route path='/login' component={LogInContainer} />
+        <Route path="/login" component={LogIn} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/profile" component={Profile} />
         <Route path='/restaurants/:id' component={RestaurantContainer} />
         <Route path='/' component={MainContainer} />
       </Switch>

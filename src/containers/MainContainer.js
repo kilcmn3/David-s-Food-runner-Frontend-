@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import SearchContainer from '../containers/SearchContainer'
+import NavBar from '../components/NavBar'
 
 export default class MainContainer extends Component {
 
   render() {
     return (
       <div className='MainContainer'>
-        <h3>MainContainer</h3>
+        <NavBar />
         <SearchContainer />
       </div>
     );

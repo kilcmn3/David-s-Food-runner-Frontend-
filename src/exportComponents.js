@@ -7,7 +7,6 @@ import ReviewListContainer from './containers/ReviewListContainer'
 import ReviewForm from './components/ReviewForm'
 import SignUp from './components/SignUp';
 import Profile from './components/Profile';
-import NavBar from './components/NavBar';
 import LogIn from './components/LogIn';
 
 export {
@@ -20,6 +19,5 @@ export {
   ReviewForm,
   SignUp,
   Profile,
-  NavBar,
   LogIn,
 };
