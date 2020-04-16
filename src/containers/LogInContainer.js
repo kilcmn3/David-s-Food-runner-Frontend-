@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { LogIn, SignUp, Profile } from '../exportComponents';
+import { LogIn, SignUp } from '../exportComponents';
 
 const LogInContainerc = () => {
   return (

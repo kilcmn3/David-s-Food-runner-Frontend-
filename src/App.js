@@ -5,15 +5,14 @@ import './App.css';
 
 const App = () => {
   const userLogIn = localStorage.getItem("userid")
-  console.log(userLogIn)
   return (
     <Switch>
       <Route path='/login' component={LogIn} />
       <Route path='/Logout' component={Logout} />
       <Route path='/signup' component={SignUp} />
       <Route path='/MainContainer' render={() => (userLogIn) ? (<MainContainer />) : (<Redirect to="/login" />)} />
-      <Route path='/restaurants/:id' render={() => (userLogIn) ? (<RestaurantContainer />) : (<Redirect to="/login" />)} />
       <Route path='/profile' render={() => (userLogIn) ? (<Profile />) : (<Redirect to="/login" />)} />
+      <Route path='/restaurants/:id' render={() => (userLogIn) ? (<RestaurantContainer />) : (<Redirect to="/login" />)} />
       <Route path='/' component={LogInContainer} />
     </Switch>
   );

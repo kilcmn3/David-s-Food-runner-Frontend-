@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ReviewContainer, NavBar } from '../exportComponents'
 import * as requests from './requests'
 
-export default class RestaurantContainer extends Component {
+class RestaurantContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -13,9 +13,8 @@ export default class RestaurantContainer extends Component {
   }
 
   componentDidMount() {
-    let id = this.props.match.params.id
-
-    requests.fetchOneRest(id)
+    let url = window.location.href.split("/")
+    requests.fetchOneRest(url[url.length - 1])
       .then(response => response.json())
       .then(restaurant => {
         let comments = []
@@ -72,13 +71,13 @@ export default class RestaurantContainer extends Component {
 
   render() {
     return (
-      <div className='MainContainer'>
+      <div className="restaurant container">
         <NavBar />
-        <div className="restaurant container">
-          {this.renderRestaurant()}
-          <ReviewContainer comments={this.state.comments} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleClick={this.handleClick} />
-        </div>
+        {this.renderRestaurant()}
+        <ReviewContainer comments={this.state.comments} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleClick={this.handleClick} />
       </div>
     )
   }
 }
+
+export default RestaurantContainer

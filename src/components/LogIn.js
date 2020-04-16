@@ -17,23 +17,16 @@ const LogIn = (props) => {
 
         bcrypt.hash(values.password, saltRounds, function (err, hash) {
           requests.fetchUser(values.email)
-            .then(response => {
-              if (response.status >= 500) {
-                alert("Couldn't find your account")
-              } else if (response.status === 200) {
-                return response.json()
-              }
-            })
+            .then(response => response.json())
             .then(data => {
-              if (bcrypt.compareSync(values.password, data.password)) {
+              if (data.status >= 400) {
+                alert("Email or Password is wrong")
+              } else {
                 localStorage.setItem("userid", data.id)
                 props.history.push("/MainContainer");
-              } else {
-                alert("Email or Password is wrong")
               }
             })
         })
-
       }}
 
       validationSchema={
