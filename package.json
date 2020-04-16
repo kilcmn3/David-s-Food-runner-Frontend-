@@ -10,7 +10,6 @@
     "bcryptjs": "^2.4.3",
     "formik": "^2.1.4",
     "gulp-babel": "^8.0.0",
-    "jwt-decode": "^2.2.0",
     "kind-of": "^6.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
