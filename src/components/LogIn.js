@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import * as requests from '../containers/requests'
-import SignUp from './SignUp'
 
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
 const LogIn = (props) => (
-  <Formik
+  < Formik
     initialValues={{ email: "", password: "" }}
     onSubmit={(values, { setSubmitting }) => {
 
@@ -18,17 +17,16 @@ const LogIn = (props) => (
       bcrypt.hash(values.password, saltRounds, function (err, hash) {
         requests.fetchUser(values.email)
           .then(response => {
-            debugger
             if (response.status >= 500) {
               alert("Couldn't find your account")
             } else if (response.status === 200) {
               return response.json()
             }
           })
-          .then(email => {
-            if (bcrypt.compareSync(values.password, email.password)) {
-              localStorage.setItem("userID", email.id)
-              return props.history.replace("/main");
+          .then(data => {
+            if (bcrypt.compareSync(values.password, data.password)) {
+              localStorage.setItem("userId", data.id)
+              return props.history.replace("/");
             } else {
               alert("Email or Password is wrong")
             }
@@ -37,14 +35,17 @@ const LogIn = (props) => (
 
     }}
 
-    validationSchema={Yup.object().shape({
-      email: Yup.string()
-        .email()
-        .required("Required"),
-      password: Yup.string()
-        .required("No password provided.")
-    })}
+    validationSchema={
+      Yup.object().shape({
+        email: Yup.string()
+          .email()
+          .required("Required"),
+        password: Yup.string()
+          .required("No password provided.")
+      })
+    }
   >
+
     {props => {
       const {
         values,
@@ -95,7 +96,7 @@ const LogIn = (props) => (
         </form>
       );
     }}
-  </Formik>
+  </Formik >
 )
 
 export default LogIn

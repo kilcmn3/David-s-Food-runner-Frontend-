@@ -21,10 +21,11 @@ const SignUp = (props) => (
       bcrypt.hash(values.password, saltRounds, function (err, hash) {
         requests.postUsers({ email: values.email, password: hash })
           .then(response => {
+            debugger
             if (response.status >= 500) {
               alert("Somone is using the email. Please use different one")
             } else if (response.status === 200) {
-              return props.history.replace("/");
+              return props.history.replace("/login");
             }
           })
       })

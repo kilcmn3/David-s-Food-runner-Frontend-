@@ -1,23 +1,29 @@
 import LogInContainer from './containers/LogInContainer';
-import SearchContainer from './containers/SearchContainer';
 import MainContainer from './containers/MainContainer';
-import RestaurantsListContainer from './containers/RestaurantsListContainer';
 import RestaurantContainer from './containers/RestaurantContainer'
+import RestaurantsListContainer from './containers/RestaurantsListContainer';
+import ReviewContainer from './containers/ReviewContainer'
 import ReviewListContainer from './containers/ReviewListContainer'
+import SearchContainer from './containers/SearchContainer';
+import AuthRoute from './components/AuthRoute'
+import LogIn from './components/LogIn';
+import NavBar from './components/NavBar'
+import Profile from './components/Profile';
 import ReviewForm from './components/ReviewForm'
 import SignUp from './components/SignUp';
-import Profile from './components/Profile';
-import LogIn from './components/LogIn';
 
 export {
   LogInContainer,
-  SearchContainer,
   MainContainer,
-  RestaurantsListContainer,
   RestaurantContainer,
+  RestaurantsListContainer,
+  ReviewContainer,
   ReviewListContainer,
+  SearchContainer,
+  AuthRoute,
+  LogIn,
+  NavBar,
+  Profile,
   ReviewForm,
   SignUp,
-  Profile,
-  LogIn,
 };

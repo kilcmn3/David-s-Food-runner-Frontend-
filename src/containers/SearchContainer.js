@@ -25,7 +25,7 @@ export default class SearchContainer extends Component {
       <div className='searchContainer'>
         <h2>SearchContainer</h2>
         <SearchBar handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-        <RestaurantsListContainer search={this.state.search} searchDatas={this.state.searchDatas} />
+        <RestaurantsListContainer search={this.state.search} searchDatas={this.state.searchDatas} handleClick={this.props.handleClick} />
       </div>
     );
   }

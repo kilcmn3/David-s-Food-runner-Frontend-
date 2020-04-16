@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReviewContainer from './ReviewContainer'
+import { ReviewContainer, NavBar } from '../exportComponents'
 import * as requests from './requests'
 
 export default class RestaurantContainer extends Component {
@@ -8,19 +8,25 @@ export default class RestaurantContainer extends Component {
     this.state = {
       comment: "",
       comments: [],
-      restaurant: {}
+      restaurant: null
     }
   }
 
   componentDidMount() {
     let id = this.props.match.params.id
-    requests.fetchOneRest(id).then(restaurant => {
-      let newComments = restaurant.comments.map(target => target.comment)
-      this.setState({ comments: newComments, restaurant: restaurant })
-    })
+
+    requests.fetchOneRest(id)
+      .then(response => response.json())
+      .then(restaurant => {
+        let comments = []
+        if (restaurant.comments) {
+          comments = restaurant.comments.map(target => target.comment)
+        }
+        this.setState({ comments, restaurant: restaurant })
+      })
   }
   renderRestaurant = () => {
-    if (this.state.restaurant.id) {
+    if (this.state.restaurant) {
       const { photos, name, location, categories, phone } = this.state.restaurant
       let parseLocation = JSON.parse(location)
       let alias = JSON.parse(categories[0])["alias"]
@@ -28,7 +34,7 @@ export default class RestaurantContainer extends Component {
 
       return (
         <div className="restaurant info">
-          <img src={photos} alt="" />
+          <img src={photos[0]} alt="" />
           <p>Name: {name}</p>
           <p>Address: {address}</p>
           <p>Phone: {phone}</p>
@@ -49,12 +55,14 @@ export default class RestaurantContainer extends Component {
 
     let datas = {
       comment: this.state.comment,
-      user_id: 1,
+      user_id: localStorage.getItem('userId'),
       restaurant_id: this.state.restaurant.id
     }
     requests.postComments(datas)
       .then(response => response.json())
-      .then((data) => this.setState({ comments: [...this.state.comments, data], comment: "" }))
+      .then((data) => {
+        this.setState({ comments: [...this.state.comments, data.comment], comment: "" })
+      })
   }
 
   handleClick = () => {
@@ -63,11 +71,14 @@ export default class RestaurantContainer extends Component {
   }
 
   render() {
-    // console.log(this.state.comments)
-    return (<div className="restaurant container">
-      {this.renderRestaurant()}
-      <ReviewContainer comments={this.state.comments} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleClick={this.handleClick} />
-    </div>
+    return (
+      <div className='MainContainer'>
+        <NavBar />
+        <div className="restaurant container">
+          {this.renderRestaurant()}
+          <ReviewContainer comments={this.state.comments} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleClick={this.handleClick} />
+        </div>
+      </div>
     )
   }
 }

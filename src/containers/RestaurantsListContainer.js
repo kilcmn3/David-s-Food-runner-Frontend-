@@ -28,8 +28,8 @@ export default class RestaurantsListContainer extends Component {
     }
 
     let slicedDatas = copyDatas.slice(startIndex, startIndex + 5)
-    return slicedDatas.map((restaurant, index) => {
-      return <RestaurantCard key={index} restaurant={restaurant} />
+    return slicedDatas.map(restaurant => {
+      return <RestaurantCard key={restaurant.id} restaurant={restaurant} handleClick={this.props.handleClick} />
     })
   }
 
