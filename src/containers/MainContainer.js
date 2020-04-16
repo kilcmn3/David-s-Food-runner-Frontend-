@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
 import { SearchContainer, NavBar, RestaurantContainer } from '../exportComponents'
 
 export default class MainContainer extends Component {
