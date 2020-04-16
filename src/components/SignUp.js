@@ -2,7 +2,6 @@ import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import * as requests from '../containers/requests'
-import { Redirect } from 'react-router-dom';
 
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
@@ -21,7 +20,6 @@ const SignUp = (props) => (
       bcrypt.hash(values.password, saltRounds, function (err, hash) {
         requests.postUsers({ email: values.email, password: hash })
           .then(response => {
-            debugger
             if (response.status >= 500) {
               alert("Somone is using the email. Please use different one")
             } else if (response.status === 200) {

@@ -24,7 +24,6 @@ export default class SearchContainer extends Component {
       .then(searchDatas => this.setState({ searchDatas, search: "" }))
   }
   render() {
-    console.log(this.state.searchDatas)
     return (
       <div className='searchContainer'>
         <h2>SearchContainer</h2>
