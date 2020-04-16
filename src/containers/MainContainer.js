@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { SearchContainer, NavBar, RestaurantContainer } from '../exportComponents'
+import { SearchContainer, NavBar, RestaurantContainer, Profile } from '../exportComponents'
+import { Redirect } from 'react-router-dom';
 
 export default class MainContainer extends Component {
   constructor(props) {
@@ -10,7 +11,6 @@ export default class MainContainer extends Component {
   }
 
   handleClick = (restaurant) => {
-    localStorage.setItem("restaurantId", restaurant.Id)
     this.setState({ restContToggle: !this.state.restContToggle }, this.props.history.push(`/restaurants/${restaurant.id}`))
   }
   render() {

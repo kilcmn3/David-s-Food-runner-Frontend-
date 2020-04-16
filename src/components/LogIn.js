@@ -26,11 +26,10 @@ const LogIn = (props) => {
             })
             .then(data => {
               if (bcrypt.compareSync(values.password, data.password)) {
-                localStorage.getItem(data.id)
+                localStorage.setItem("userid", data.id)
                 props.history.push("/MainContainer");
               } else {
                 alert("Email or Password is wrong")
-                props.history.push("/");
               }
             })
         })

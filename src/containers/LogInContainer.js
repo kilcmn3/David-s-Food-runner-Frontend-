@@ -8,7 +8,6 @@ const LogInContainerc = () => {
       <Redirect exact from='/login-signup' to='/login' />
       <LogIn />
       <SignUp />
-      <Profile />
     </div >
   )
 }

@@ -1,17 +1,19 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { MainContainer, RestaurantContainer, LogInContainer, LogIn, SignUp, Profile } from './exportComponents';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { MainContainer, RestaurantContainer, LogInContainer, LogIn, SignUp, Profile, Logout } from './exportComponents';
 import './App.css';
 
 const App = () => {
-
+  const userLogIn = localStorage.getItem("userid")
+  console.log(userLogIn)
   return (
     <Switch>
       <Route path='/login' component={LogIn} />
+      <Route path='/Logout' component={Logout} />
       <Route path='/signup' component={SignUp} />
-      <Route path='/MainContainer' component={MainContainer} />
-      <Route path='/restaurants/:id' component={RestaurantContainer} />
-      <Route path='/profile' component={Profile} />
+      <Route path='/MainContainer' render={() => (userLogIn) ? (<MainContainer />) : (<Redirect to="/login" />)} />
+      <Route path='/restaurants/:id' render={() => (userLogIn) ? (<RestaurantContainer />) : (<Redirect to="/login" />)} />
+      <Route path='/profile' render={() => (userLogIn) ? (<Profile />) : (<Redirect to="/login" />)} />
       <Route path='/' component={LogInContainer} />
     </Switch>
   );
