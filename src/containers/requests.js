@@ -21,6 +21,15 @@ export const postUsers = (users) => {
         body: JSON.stringify({ users })
     })
 }
+
+export const patchUsers = (users, id) => {
+    return fetch(usersURL + `/${id}`, {
+        method: "PATCH",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ users })
+    })
+}
+
 export const postComments = (comment) => {
     return fetch(commentsURL, {
         method: "POST",

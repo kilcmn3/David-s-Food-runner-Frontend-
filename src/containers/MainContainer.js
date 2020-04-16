@@ -1,26 +1,34 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
 import { SearchContainer, NavBar, RestaurantContainer } from '../exportComponents'
+import { Redirect, withRouter } from 'react-router-dom';
 
-export default class MainContainer extends Component {
+class MainContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
       restContToggle: false,
+      restaurant: null
     }
+  }
+  componentDidMount() {
+    this.setState({ restContToggle: false })
   }
 
   handleClick = (restaurant) => {
-    localStorage.setItem("restaurantId", restaurant.Id)
-    this.setState({ restContToggle: !this.state.restContToggle }, this.props.history.push(`/restaurants/${restaurant.id}`))
+    this.setState({ restContToggle: !this.state.restContToggle, restaurantId: restaurant.id }, (this.props.history.push({ pathname: `/restaurants/${restaurant.id}` })))
+    // if (true) {
+    // return (< Redirect to={{ pathname: `/restaurants/${restaurant.id}` }} />)
+    // }
   }
   render() {
     return (
       <div className='MainContainer'>
-        <NavBar />
+        {!this.state.restContToggle ? <NavBar /> : null}
         {!this.state.restContToggle ? <SearchContainer handleClick={this.handleClick} /> : null}
-        {this.state.restContToggle ? <RestaurantContainer /> : null}
+        {/* {this.state.restContToggle ? <RestaurantContainer restaurantId={this.state.restaurantId} /> : null} */}
       </div>
     );
   }
 }
+
+export default withRouter(MainContainer)
