@@ -10,6 +10,7 @@ export default class NavBar extends Component {
             <li><Link to={'/'} className="nav-link">Home</Link></li>
             {/* <li><Link to={'/serach'} className="nav-link">My Fav</Link></li> */}
             <li><Link to={'/Profile'} className="nav-link">Profile</Link></li>
+            {/* <li><Link ></Link></li> */}
           </ul>
         </nav>
       </div>

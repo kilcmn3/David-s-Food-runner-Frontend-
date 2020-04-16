@@ -1,19 +1,19 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { MainContainer, RestaurantContainer, SignUp, LogIn, Profile } from './exportComponents';
+import { AuthRoute, MainContainer, RestaurantContainer, LogInContainer, LogIn, SignUp, Profile } from './exportComponents';
 import './App.css';
 
-function App() {
+const App = () => {
+
   return (
-    <div className='app'>
-      <Switch>
-        <Route path="/signup" component={SignUp} />
-        <Route path="/profile" component={Profile} />
-        <Route path='/restaurants/:id' component={RestaurantContainer} />
-        <Route path='/main' component={MainContainer} />
-        <Route path="/" component={LogIn} />
-      </Switch>
-    </div>
+    <Switch>
+      <Route path='/login-signup' component={LogInContainer} />
+      <Route path='/login' component={LogIn} />
+      <Route path='/signup' component={SignUp} />
+      <Route path='/restaurants/:id' component={RestaurantContainer} />
+      <Route path='/profile' component={Profile} />
+      <Route path='/' component={MainContainer} />
+    </Switch>
   );
 }
 
