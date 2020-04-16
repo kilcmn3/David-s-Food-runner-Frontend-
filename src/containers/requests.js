@@ -5,14 +5,8 @@ const restaurantsURL = 'http://localhost:4000/restaurants';
 const commentsURL = 'http://localhost:4000/comments'
 const usersURL = 'http://localhost:4000/users'
 
-// parse incoming data
-const parseData = (response) => response.json()
-// error handler
-const catchError = (error) => console.log(`%c${error}`, 'color: red;');
-
-
 export const fetchRestaurants = () =>
-    fetch(restaurantsURL).then(parseData).catch(catchError);
+    fetch(restaurantsURL)
 
 export const fetchOneRest = (id) =>
     fetch(restaurantsURL + `/${id}`)
@@ -36,5 +30,5 @@ export const postComments = (comment) => {
 }
 
 export const searchRestaurants = (data) =>
-    fetch(restaurantsURL + `/search?q=${data}`).then(parseData).catch(catchError);
+    fetch(restaurantsURL + `/search?q=${data}`)
 

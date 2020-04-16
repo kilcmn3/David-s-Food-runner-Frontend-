@@ -12,22 +12,18 @@ export default class RestaurantsListContainer extends Component {
   }
   componentDidMount() {
     if (this.props.searchDatas.length === 0) {
-      requests.fetchRestaurants().then(restaurants => this.setState({ restaurants }))
+      requests.fetchRestaurants()
+        .then(response => response.json())
+        .then(restaurants => this.setState({ restaurants }))
     }
   }
 
   renderRestaurants = () => {
     const { searchDatas } = this.props
     const { startIndex, restaurants } = this.state
-    let copyDatas
-
-    if (!searchDatas || searchDatas.length === 0) {
-      copyDatas = restaurants
-    } else if (searchDatas.length >= 1) {
-      copyDatas = searchDatas
-    }
-
+    let copyDatas = searchDatas.length === 0 ? restaurants : searchDatas
     let slicedDatas = copyDatas.slice(startIndex, startIndex + 5)
+
     return slicedDatas.map(restaurant => {
       return <RestaurantCard key={restaurant.id} restaurant={restaurant} handleClick={this.props.handleClick} />
     })
@@ -36,8 +32,6 @@ export default class RestaurantsListContainer extends Component {
   render() {
     return (
       <div className="restaurant list container" >
-        <h3>RestaurantsListContainer</h3>
-
         {this.renderRestaurants()}
       </div >
     );

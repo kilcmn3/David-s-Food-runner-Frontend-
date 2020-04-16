@@ -11,6 +11,7 @@ export default class SearchContainer extends Component {
       searchDatas: []
     }
   }
+
   handleChange = (event) => {
     this.setState({ search: event.target.value })
   }
@@ -18,9 +19,12 @@ export default class SearchContainer extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
 
-    requests.searchRestaurants(this.state.search).then(searchDatas => this.setState({ searchDatas }))
+    requests.searchRestaurants(this.state.search)
+      .then(response => response.json())
+      .then(searchDatas => this.setState({ searchDatas, search: "" }))
   }
   render() {
+    console.log(this.state.searchDatas)
     return (
       <div className='searchContainer'>
         <h2>SearchContainer</h2>

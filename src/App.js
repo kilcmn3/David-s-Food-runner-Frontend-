@@ -5,7 +5,6 @@ import './App.css';
 
 const App = () => {
 
-  console.log("app comp?")
   return (
     <Switch>
       <Route path='/login-signup' component={LogInContainer} />

@@ -10,9 +10,10 @@ export default class MainContainer extends Component {
     }
   }
 
-  handleClick = (restaurantId) => {
-    localStorage.setItem("restaurantId", restaurantId)
-    this.setState({ restContToggle: !this.state.restContToggle }, this.props.history.push(`/restaurants/${restaurantId}`))
+  handleClick = (restaurant) => {
+    console.log(restaurant)
+    localStorage.setItem("restaurantId", restaurant.Id)
+    this.setState({ restContToggle: !this.state.restContToggle }, this.props.history.push(`/restaurants/${restaurant.id}`))
   }
   render() {
     return (

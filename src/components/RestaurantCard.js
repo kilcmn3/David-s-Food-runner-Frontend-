@@ -2,18 +2,18 @@ import React from 'react';
 import { Redirect } from 'react-router-dom'
 
 const RestaurantCard = (props) => {
+  let { name, phone, location } = props.restaurant
+  location = JSON.parse(location)
+  let address = location.address1 + ", " + location.city + ' ' + location.state + " " + location.zip_code
 
-  const { id, name, phone, location } = props.restaurant
-  // let parselocation = JSON.parse(location)
-  const address = location.address1 + ", " + location.city + ' ' + location.state + " " + location.zip_code
   return (
-    <div className="restaurant card" onClick={(event) => props.handleClick(id)} >
+    <div className="restaurant card" onClick={(event) => props.handleClick(props.restaurant)} >
       <ul>
-        Restaurant Name: {name}
+        <li>Restaurant Name: {name}</li>
         <li>address: {address}</li>
         <li>phone: {phone}</li>
       </ul>
-    </div>
+    </div >
   )
 }
 
