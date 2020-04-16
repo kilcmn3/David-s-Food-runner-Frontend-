@@ -2,13 +2,21 @@ import React, { Component } from 'react';
 import { ReviewContainer, NavBar } from '../exportComponents'
 import * as requests from './requests'
 
+const initState = {
+  comment: "",
+  comments: [],
+  restaurant: null,
+  user: null
+}
+
 class RestaurantContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
       comment: "",
       comments: [],
-      restaurant: null
+      restaurant: null,
+      user: null
     }
   }
 
@@ -17,13 +25,13 @@ class RestaurantContainer extends Component {
     requests.fetchOneRest(url[url.length - 1])
       .then(response => response.json())
       .then(restaurant => {
-        let comments = []
-        if (restaurant.comments) {
-          comments = restaurant.comments.map(target => target.comment)
-        }
-        this.setState({ comments, restaurant: restaurant })
+        this.setState({ comments: restaurant.comments, restaurant: restaurant })
       })
+    requests.fetchUserById(localStorage.getItem("userid"))
+      .then(response => response.json())
+      .then(user => this.setState({ user }))
   }
+
   renderRestaurant = () => {
     if (this.state.restaurant) {
       const { photos, name, location, categories, phone } = this.state.restaurant
@@ -54,19 +62,30 @@ class RestaurantContainer extends Component {
 
     let datas = {
       comment: this.state.comment,
-      user_id: localStorage.getItem('userId'),
-      restaurant_id: this.state.restaurant.id
+      user_id: localStorage.getItem('userid'),
+      restaurant_id: this.state.restaurant.id,
+      user_email: this.state.user.email
     }
     requests.postComments(datas)
       .then(response => response.json())
       .then((data) => {
-        this.setState({ comments: [...this.state.comments, data.comment], comment: "" })
+        console.log(data)
+        this.setState({ comments: [...this.state.comments, data], comment: "" })
       })
   }
 
-  handleClick = () => {
-    //delete comment and database
-    console.log("delete te post!")
+  handleDelete = (event) => {
+    let id = event.target.parentElement.id
+    let target = this.state.comments.map(comment => comment.id).indexOf(event.target.id)
+    let newArr = this.state.comments
+    newArr.splice(target, 1)
+    this.setState({ comments: newArr })
+
+    requests.deleteComment(id)
+  }
+
+  handleComment = (event) => {
+    this.setState({ comment: event.target.value })
   }
 
   render() {
@@ -74,7 +93,7 @@ class RestaurantContainer extends Component {
       <div className="restaurant container">
         <NavBar />
         {this.renderRestaurant()}
-        <ReviewContainer comments={this.state.comments} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleClick={this.handleClick} />
+        <ReviewContainer comment={this.state.comment} comments={this.state.comments} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleDelete={this.handleDelete} />
       </div>
     )
   }
