@@ -5,63 +5,63 @@ import * as Yup from 'yup';
 import * as requests from '../containers/requests'
 import { Form } from 'react-bootstrap';
 import { CONTAINER, MYFORM, BUTTON } from '../styledcomponent/styles'
-import NavBar from './NavBar'
+import Navbars from './NavBars'
 
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
 const Profile = (props) => {
   return (
-    <CONTAINER>
-      <h1>Register here</h1>
-      <Formik
-        initialValues={{ email: "", password: "", confirmPassword: "" }}
+    <Fragment>
+      <Navbars />
+      <CONTAINER>
+        <h1>Register here</h1>
+        <Formik
+          initialValues={{ email: "", password: "", confirmPassword: "" }}
 
-        onSubmit={(values, { setSubmitting }) => {
-          setSubmitting(false);
+          onSubmit={(values, { setSubmitting }) => {
+            setSubmitting(false);
 
-          bcrypt.hash(values.password, saltRounds, function (err, hash) {
-            requests.postUsers({ email: values.email, password: hash })
-              .then(response => response.json())
-              .then(data => {
-                if (data.status === 500) {
-                  alert("Someone's using that Email")
-                } else {
-                  localStorage.setItem("userid", data.id)
-                  return props.history.push("/MainContainer");
-                }
-              })
-          })
-        }}
+            bcrypt.hash(values.password, saltRounds, function (err, hash) {
+              requests.postUsers({ email: values.email, password: hash })
+                .then(response => response.json())
+                .then(data => {
+                  if (data.status === 500) {
+                    alert("Someone's using that Email")
+                  } else {
+                    localStorage.setItem("userid", data.id)
+                    return props.history.push("/MainContainer");
+                  }
+                })
+            })
+          }}
 
-        validationSchema={
-          Yup.object().shape({
-            email: Yup.string()
-              .email()
-              .required("Required"),
-            password: Yup.string()
-              .required("No password provided.")
-              .min(8, "Password is too short - should be 8 chars minimum.")
-              .matches(/(?=.*[0-9])/, "Password must contain a number."),
-            confirmPassword: Yup.string()
-              .oneOf([Yup.ref('password'), null], 'Passwords must match')
-              .required('Confirm Password is required')
-          })
-        }
-      >
-        {props => {
-          const {
-            values,
-            touched,
-            errors,
-            isSubmitting,
-            handleChange,
-            handleBlur,
-            handleSubmit
-          } = props;
-          return (
-            <Fragment>
-              <NavBar />
+          validationSchema={
+            Yup.object().shape({
+              email: Yup.string()
+                .email()
+                .required("Required"),
+              password: Yup.string()
+                .required("No password provided.")
+                .min(8, "Password is too short - should be 8 chars minimum.")
+                .matches(/(?=.*[0-9])/, "Password must contain a number."),
+              confirmPassword: Yup.string()
+                .oneOf([Yup.ref('password'), null], 'Passwords must match')
+                .required('Confirm Password is required')
+            })
+          }
+        >
+          {props => {
+            const {
+              values,
+              touched,
+              errors,
+              isSubmitting,
+              handleChange,
+              handleBlur,
+              handleSubmit
+            } = props;
+            return (
               <MYFORM onSubmit={handleSubmit} className="mx-auto">
                 <Form.Group controlId="formEmail">
                   <Form.Label>Update User Name :</Form.Label>
@@ -112,16 +112,13 @@ const Profile = (props) => {
                 <BUTTON variant="primary" type="submit" disabled={isSubmitting}>
                   Submit
           </BUTTON>
-                <Link to='/login'><BUTTON variant="primary" type="submit" >
-                  Back to Login
-          </BUTTON></Link>
               </MYFORM>
-            </Fragment>
-          )
-        }
-        }
-      </Formik>
-    </CONTAINER>
+            )
+          }
+          }
+        </Formik>
+      </CONTAINER>
+    </Fragment >
   );
 }
 

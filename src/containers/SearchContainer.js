@@ -13,12 +13,13 @@ export default class SearchContainer extends Component {
   }
 
   handleChange = (event) => {
+    console.log(event.target.value)
     this.setState({ search: event.target.value })
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
-
+    console.log(this.state.search)
     requests.searchRestaurants(this.state.search)
       .then(response => response.json())
       .then(searchDatas => this.setState({ searchDatas, search: "" }))
@@ -26,8 +27,7 @@ export default class SearchContainer extends Component {
   render() {
     return (
       <div className='searchContainer'>
-        <h2>SearchContainer</h2>
-        <SearchBar handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+        <SearchBar handleChange={this.handleChange} handleSubmit={this.handleSubmit} search={this.state.search} />
         <RestaurantsListContainer search={this.state.search} searchDatas={this.state.searchDatas} handleClick={this.props.handleClick} />
       </div>
     );

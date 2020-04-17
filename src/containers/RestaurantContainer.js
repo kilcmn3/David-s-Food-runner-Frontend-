@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ReviewContainer, NavBar } from '../exportComponents'
+import { ReviewContainer, Navbars } from '../exportComponents'
 import * as requests from './requests'
 
 class RestaurantContainer extends Component {
@@ -84,7 +84,7 @@ class RestaurantContainer extends Component {
   render() {
     return (
       <div className="restaurant container">
-        <NavBar />
+        <Navbars />
         {this.renderRestaurant()}
         <ReviewContainer comment={this.state.comment} comments={this.state.comments} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleDelete={this.handleDelete} />
       </div>
