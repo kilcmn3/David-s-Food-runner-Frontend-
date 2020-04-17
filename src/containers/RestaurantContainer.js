@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 import { ReviewContainer, NavBar } from '../exportComponents'
 import * as requests from './requests'
 
-const initState = {
-  comment: "",
-  comments: [],
-  restaurant: null,
-  user: null
-}
-
 class RestaurantContainer extends Component {
   constructor(props) {
     super(props)

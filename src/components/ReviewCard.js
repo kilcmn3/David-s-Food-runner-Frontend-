@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as requests from '../containers/requests'
 
 class ReviewCard extends Component {
   constructor(props) {
