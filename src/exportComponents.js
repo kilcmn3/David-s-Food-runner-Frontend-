@@ -7,7 +7,7 @@ import ReviewListContainer from './containers/ReviewListContainer'
 import SearchContainer from './containers/SearchContainer';
 import LogIn from './components/LogIn';
 import Logout from './components/Logout'
-import Navbars from './components/Navbars'
+import Navheaders from './components/Navheaders'
 import Profile from './components/Profile';
 import ReviewForm from './components/ReviewForm'
 import SignUp from './components/SignUp';
@@ -22,7 +22,7 @@ export {
   SearchContainer,
   LogIn,
   Logout,
-  Navbars,
+  Navheaders,
   Profile,
   ReviewForm,
   SignUp,

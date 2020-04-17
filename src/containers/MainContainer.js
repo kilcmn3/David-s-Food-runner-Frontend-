@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SearchContainer, Navbars } from '../exportComponents'
+import { SearchContainer, Navheaders } from '../exportComponents'
 import { withRouter } from 'react-router-dom';
 
 class MainContainer extends Component {
@@ -20,7 +20,7 @@ class MainContainer extends Component {
   render() {
     return (
       <div className='MainContainer'>
-        {!this.state.restContToggle ? <Navbars /> : null}
+        {!this.state.restContToggle ? <Navheaders /> : null}
         {!this.state.restContToggle ? <SearchContainer handleClick={this.handleClick} /> : null}
       </div>
     );

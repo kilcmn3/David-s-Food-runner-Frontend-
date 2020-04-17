@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import * as requests from '../containers/requests'
 import { Form } from 'react-bootstrap';
 import { CONTAINER, MYFORM, BUTTON } from '../styledcomponent/styles'
-import Navbars from './NavBars'
+import Navheaders from './Navheaders'
 
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
@@ -13,7 +13,7 @@ const saltRounds = 10;
 const Profile = (props) => {
   return (
     <Fragment>
-      <Navbars />
+      <Navheaders />
       <CONTAINER>
         <h1>Register here</h1>
         <Formik
