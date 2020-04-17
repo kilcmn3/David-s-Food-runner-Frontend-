@@ -15,7 +15,7 @@ const Profile = (props) => {
     <Fragment>
       <Navheaders />
       <CONTAINER>
-        <h1>Register here</h1>
+        <h1>Profile page</h1>
         <Formik
           initialValues={{ email: "", password: "", confirmPassword: "" }}
 
@@ -26,12 +26,9 @@ const Profile = (props) => {
               requests.postUsers({ email: values.email, password: hash })
                 .then(response => response.json())
                 .then(data => {
-                  if (data.status === 500) {
-                    alert("Someone's using that Email")
-                  } else {
-                    localStorage.setItem("userid", data.id)
-                    return props.history.push("/MainContainer");
-                  }
+                  alert("Update complete!")
+                  // localStorage.setItem("userid", data.id)
+                  // return props.history.push("/MainContainer");
                 })
             })
           }}

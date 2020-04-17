@@ -35,7 +35,7 @@ export default class RestaurantsListContainer extends Component {
   handlePageChange = (pageNumber) => {
     let startIndex
     if (pageNumber > this.state.activePage) {
-      startIndex = this.state.startIndex + 5
+      startIndex = this.state.startIndex + (pageNumber * 5)
     } else if (pageNumber === 1) {
       startIndex = 0
     } else {
