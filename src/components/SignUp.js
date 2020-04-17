@@ -27,7 +27,8 @@ const SignUp = (props) => {
                   alert("Someone's using that Email")
                 } else {
                   localStorage.setItem("userid", data.id)
-                  return props.history.push("/MainContainer");
+                  alert("Welcome to David's Food runner!")
+                  return props.history.push("/login");
                 }
               })
           })
