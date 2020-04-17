@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Figure } from 'react-bootstrap';
 import { ReviewContainer, Navheaders } from '../exportComponents'
 import * as requests from './requests'
+import { Container, Row, Col } from 'react-bootstrap';
 
 class RestaurantContainer extends Component {
   constructor(props) {
@@ -34,20 +35,26 @@ class RestaurantContainer extends Component {
       const address = parseLocation.address1 + ", " + parseLocation.city + ' ' + parseLocation.state + " " + parseLocation.zip_code
 
       return (
-        <Figure>
-          <Figure.Image
-            width={900}
-            height={900}
-            alt="900x900"
-            src={photos[0]}
-          />
-          <Figure.Caption>
-            <p>Name: {name}</p>
-            <p>Address: {address}</p>
-            <p>Phone: {phone}</p>
-            <p>category: {alias}</p>
-          </Figure.Caption>
-        </Figure>
+        <Container>
+          <Row>
+            <Col>
+              <Figure>
+                <Figure.Image
+                  width={900}
+                  height={900}
+                  alt="900x900"
+                  src={photos[0]}
+                />
+                <Figure.Caption>
+                  <p>Name: {name}</p>
+                  <p>Address: {address}</p>
+                  <p>Phone: {phone}</p>
+                  <p>category: {alias}</p>
+                </Figure.Caption>
+              </Figure>
+            </Col>
+          </Row>
+        </Container >
       )
     } else {
       return null
