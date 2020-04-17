@@ -3,6 +3,7 @@ import RestaurantsListContainer from '../containers/RestaurantsListContainer'
 import SearchBar from '../components/SearchBar'
 import * as requests from './requests'
 
+
 export default class SearchContainer extends Component {
   constructor() {
     super()

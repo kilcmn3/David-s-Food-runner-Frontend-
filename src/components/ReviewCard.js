@@ -15,13 +15,14 @@ class ReviewCard extends Component {
   }
 
   render() {
+    console.log(this.props)
     const { id, user_id, comment, user_email } = this.props.datas
     return (
       <div className="review card" onClick={this.handleClick} >
         <ul id={id} >
           <li className="li" id={user_id}>
             {comment}
-            <p>user: {user_email}</p>
+            <p>User: {user_email}</p>
           </li>
           {this.state.buttonToggle ? <button onClick={this.props.handleDelete} >Delete</button> : null}
         </ul>

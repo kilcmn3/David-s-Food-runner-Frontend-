@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { Figure } from 'react-bootstrap';
 import { ReviewContainer, Navheaders } from '../exportComponents'
 import * as requests from './requests'
 
@@ -33,13 +34,20 @@ class RestaurantContainer extends Component {
       const address = parseLocation.address1 + ", " + parseLocation.city + ' ' + parseLocation.state + " " + parseLocation.zip_code
 
       return (
-        <div className="restaurant info">
-          <img src={photos[0]} alt="" />
-          <p>Name: {name}</p>
-          <p>Address: {address}</p>
-          <p>Phone: {phone}</p>
-          <p>category: {alias}</p>
-        </div>
+        <Figure>
+          <Figure.Image
+            width={900}
+            height={900}
+            alt="900x900"
+            src={photos[0]}
+          />
+          <Figure.Caption>
+            <p>Name: {name}</p>
+            <p>Address: {address}</p>
+            <p>Phone: {phone}</p>
+            <p>category: {alias}</p>
+          </Figure.Caption>
+        </Figure>
       )
     } else {
       return null
@@ -83,11 +91,13 @@ class RestaurantContainer extends Component {
 
   render() {
     return (
-      <div className="restaurant container">
+      <Fragment>
         <Navheaders />
-        {this.renderRestaurant()}
-        <ReviewContainer comment={this.state.comment} comments={this.state.comments} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleDelete={this.handleDelete} />
-      </div>
+        <div className="restaurant container">
+          {this.renderRestaurant()}
+          <ReviewContainer comment={this.state.comment} comments={this.state.comments} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleDelete={this.handleDelete} />
+        </div>
+      </Fragment>
     )
   }
 }
