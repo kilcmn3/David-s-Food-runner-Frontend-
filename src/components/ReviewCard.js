@@ -1,28 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
+import * as requests from '../containers/requests'
 
-const ReviewCard = (props) => {
-
-  const renderButton = () => {
-    let div = document.getElementsByClassName("hide")
-    if (div.id === localStorage.getItem("userid")) {
-      return true
-    } else {
-      return false
+class ReviewCard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      buttonToggle: false
     }
   }
+  handleClick = (event) => {
+    if (event.target.id === localStorage.getItem("userid")) {
+      this.setState({ buttonToggle: !this.state.buttonToggle })
+    }
+    return false
+  }
 
-  return (
-    <div className="review card">
-      <ul>
-        <li>
-          {props.comment}
-        </li>
-        <div id={localStorage.getItem("userid")} className="hide">
-          {renderButton() ? (<button>Delete</button>) : null}
-        </div>
-      </ul>
-    </div>
-  )
+  render() {
+    const { id, user_id, comment, user_email } = this.props.datas
+    return (
+      <div className="review card" onClick={this.handleClick} >
+        <ul id={id} >
+          <li className="li" id={user_id}>
+            {comment}
+            <p>user: {user_email}</p>
+          </li>
+          {this.state.buttonToggle ? <button onClick={this.props.handleDelete} >Delete</button> : null}
+        </ul>
+      </div >
+    )
+  }
 }
 
 export default ReviewCard

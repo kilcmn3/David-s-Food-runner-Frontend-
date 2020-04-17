@@ -5,8 +5,8 @@ const ReviewContainer = (props) => {
 
   return (
     <div className="review container">
-      <ReviewForm restaurant={props.restaurant} handleChange={props.handleChange} handleSubmit={props.handleSubmit} />
-      <ReviewListContainer comments={props.comments} handleClick={props.handleClick} />
+      <ReviewForm comment={props.comment} handleSubmit={props.handleSubmit} handleChange={props.handleChange} />
+      <ReviewListContainer comments={props.comments} handleDelete={props.handleDelete} />
     </div>
   )
 }

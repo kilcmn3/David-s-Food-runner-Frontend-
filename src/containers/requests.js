@@ -14,6 +14,9 @@ export const fetchOneRest = (id) =>
 export const fetchUser = (email) =>
     fetch(usersURL + `/login?q=${email}`)
 
+export const fetchUserById = (id) =>
+    fetch(usersURL + `/${id}`)
+
 export const postUsers = (users) => {
     return fetch(usersURL, {
         method: "POST",
@@ -36,6 +39,10 @@ export const postComments = (comment) => {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ comment })
     })
+}
+
+export const deleteComment = (id) => {
+    return fetch(commentsURL + `/${id}`, { method: "DELETE" })
 }
 
 export const searchRestaurants = (data) =>
