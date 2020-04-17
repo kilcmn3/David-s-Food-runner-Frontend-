@@ -1,15 +1,15 @@
 import React from 'react';
-
+import { Form, Button } from 'react-bootstrap';
 const SearchBar = (props) => {
 
-  return (<div className="search bar" >
-    <form onSubmit={props.handleSubmit}>
-      <input type="text" onChange={props.handleChange} placeholder="Search..." />
-      <input type="submit" value="🔍" />
-    </form>
-  </div>
+  return (
+    <Form inline onSubmit={props.handleSubmit}>
+      <Form.Group controlId="formInlineName">
+        <Form.Control type="text" placeholder="search restaurant.." onChange={props.handleChange} value={props.search} />
+      </Form.Group>
+      <Button type="submit">🔍</Button>
+    </Form>
   )
 }
-
 
 export default SearchBar
