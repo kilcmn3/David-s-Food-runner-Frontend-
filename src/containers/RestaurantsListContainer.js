@@ -45,19 +45,26 @@ export default class RestaurantsListContainer extends Component {
   }
 
   render() {
-    return (
-      <div className="restaurant list container" >
-        {this.renderRestaurants()}
-        <Pagination
-          itemClass="page-item"
-          linkClass="page-link"
-          activePage={this.state.activePage}
-          itemsCountPerPage={10}
-          totalItemsCount={this.state.restaurants.length}
-          pageRangeDisplayed={5}
-          onChange={this.handlePageChange}
-        />
-      </div >
-    );
+    if (this.state.restaurants.length > 0) {
+      return (
+        <div className="restaurant list container" >
+
+          { this.renderRestaurants()}
+          < Pagination
+            itemClass="page-item"
+            linkClass="page-link"
+            activePage={this.state.activePage}
+            itemsCountPerPage={10}
+            totalItemsCount={this.state.restaurants.length}
+            pageRangeDisplayed={5}
+            onChange={this.handlePageChange}
+          />
+
+        </div >
+      )
+    } else {
+      return <div></div>
+    }
+
   }
 }
