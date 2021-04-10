@@ -1,6 +1,10 @@
 body{
   padding: 2rem 0rem;
 }
+
+h1{
+  text-align: center;
+}
 .image-parent {
   max-width: 30%;
   max-height: 10%;
