@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
-class ReviewCard extends Component {
+export default class ReviewCard extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -35,4 +35,3 @@ class ReviewCard extends Component {
   }
 }
 
-export default ReviewCard

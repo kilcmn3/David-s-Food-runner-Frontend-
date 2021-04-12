@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RestaurantsListContainer from '../containers/RestaurantsListContainer'
-import SearchBar from '../components/SearchBar'
+// import SearchBar from '../components/SearchBar'
 import * as requests from './requests'
 
 
@@ -28,7 +28,7 @@ export default class SearchContainer extends Component {
   render() {
     return (
       <div className='searchContainer'>
-        <SearchBar handleChange={this.handleChange} handleSubmit={this.handleSubmit} search={this.state.search} />
+        {/* <SearchBar handleChange={this.handleChange} handleSubmit={this.handleSubmit} search={this.state.search} /> */}
         <RestaurantsListContainer search={this.state.search} searchDatas={this.state.searchDatas} handleClick={this.props.handleClick} />
       </div>
     );

@@ -4,7 +4,7 @@ import { ReviewContainer, Navheaders } from '../exportComponents'
 import * as requests from './requests'
 import { Container, Row, Col } from 'react-bootstrap';
 
-class RestaurantContainer extends Component {
+export default class RestaurantContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -108,5 +108,3 @@ class RestaurantContainer extends Component {
     )
   }
 }
-
-export default RestaurantContainer
