@@ -3,9 +3,6 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
 const ReviewForm = (props) => {
   return (
-
-
-
     <Form inline onSubmit={props.handleSubmit}>
       <Form.Group controlId='formInlineName'>
         <Form.Control
