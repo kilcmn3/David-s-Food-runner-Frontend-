@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Figure } from 'react-bootstrap';
-import { ReviewContainer, Navheaders } from '../exportComponents';
+import { ReviewContainer, Navbars } from '../exportComponents';
 import * as requests from './requests';
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -123,7 +123,7 @@ export default class RestaurantContainer extends Component {
   render() {
     return (
       <Fragment>
-        <Navheaders />
+        <Navbars />
         <div className='restaurant container'>
           {this.renderRestaurant()}
           <ReviewContainer

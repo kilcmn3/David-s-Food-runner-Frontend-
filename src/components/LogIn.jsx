@@ -30,7 +30,7 @@ const LogIn = (props) => {
               .then((data) => {
                 if (data) {
                   localStorage.setItem('userid', data.id);
-                  return props.history.push('/MainContainer');
+                  return props.history.push('/Home');
                 } else {
                   alert('Email or Password is wrong');
                 }

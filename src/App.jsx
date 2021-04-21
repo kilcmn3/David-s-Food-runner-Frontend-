@@ -19,7 +19,7 @@ const App = () => {
       <Route path='/Logout' component={Logout} />
       <Route path='/signup' component={SignUp} />
       <Route
-        path='/MainContainer'
+        path='/Home'
         render={() =>
           userLogIn ? <MainContainer /> : <Redirect to='/login' />
         }
