@@ -4,12 +4,12 @@ import { LogIn, SignUp } from '../exportComponents';
 
 const LogInContainerc = () => {
   return (
-    <div className='log in container' >
+    <div className='log in container'>
       <Redirect exact from='/login-signup' to='/login' />
       <LogIn />
       <SignUp />
-    </div >
-  )
-}
+    </div>
+  );
+};
 
-export default LogInContainerc
+export default LogInContainerc;
