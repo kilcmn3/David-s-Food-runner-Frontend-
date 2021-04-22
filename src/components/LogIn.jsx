@@ -29,8 +29,9 @@ const LogIn = (props) => {
               .then((response) => response.json())
               .then((data) => {
                 if (data) {
+                  console.log('hello');
                   localStorage.setItem('userid', data.id);
-                  return props.history.push('/Home');
+                  return props.history.push('/MainContainer');
                 } else {
                   alert('Email or Password is wrong');
                 }

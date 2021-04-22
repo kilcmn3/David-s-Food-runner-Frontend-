@@ -2,14 +2,14 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { LogIn, SignUp } from '../exportComponents';
 
-const LogInContainerc = () => {
+const LogInContainer = () => {
   return (
     <div className='log in container'>
       <Redirect exact from='/login-signup' to='/login' />
-      <LogIn />
-      <SignUp />
+      {/* <LogIn />
+      <SignUp /> */}
     </div>
   );
 };
 
-export default LogInContainerc;
+export default LogInContainer;

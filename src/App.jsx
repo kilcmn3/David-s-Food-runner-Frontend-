@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import {
   MainContainer,
@@ -13,6 +13,7 @@ import './App.css';
 
 const App = () => {
   const userLogIn = localStorage.getItem('userid');
+
   return (
     <Switch>
       <Route path='/login' component={LogIn} />
