@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { Formik } from 'formik';
+import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { MYFORM, BUTTON } from '../styledcomponent/styles';
 

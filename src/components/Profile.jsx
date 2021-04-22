@@ -27,8 +27,6 @@ const Profile = (props) => {
                 .then((response) => response.json())
                 .then((data) => {
                   alert('Update complete!');
-                  // localStorage.setItem("userid", data.id)
-                  // return props.history.push("/MainContainer");
                 });
             });
           }}

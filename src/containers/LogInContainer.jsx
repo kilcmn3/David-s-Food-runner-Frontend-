@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { Route } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import * as requests from '../containers/requests';
 import { CONTAINER } from '../styledcomponent/styles';
 
 import { LogIn } from '../exportComponents';
+import MainContainer from './MainContainer';
 
 const LogInContainer = (props) => {
   const [userLogin, setUserLogin] = useState(false);
@@ -31,7 +33,7 @@ const LogInContainer = (props) => {
               .then((data) => {
                 if (data) {
                   localStorage.setItem('userid', data.id);
-                  return props.history.push('/MainContainer');
+                  return props.history.push('/home');
                 } else {
                   alert('Email or Password is wrong');
                 }
@@ -54,6 +56,7 @@ const LogInContainer = (props) => {
             handleChange={handleChange}
             handleBlur={handleBlur}
             handleSubmit={handleSubmit}
+            isSubmitting={isSubmitting}
           />
         )}
       </Formik>

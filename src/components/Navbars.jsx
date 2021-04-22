@@ -27,26 +27,3 @@ const Navbars = (props) => {
 };
 
 export default Navbars;
-
-// <nav className='Navbars Navbars-expand-lg Navbars-light bg-light'>
-//   <a className='Navbars-brand' href='/MainContainer'>
-//     Home
-//   </a>
-//   <div className='collapse Navbars-collapse' id='NavbarsSupportedContent'>
-//     <ul className='Navbars-nav mr-auto'>
-//       <li className='nav-item active'>
-//         <a className='nav-link' href='/profile'>
-//           Edit Profile <span className='sr-only'>(current)</span>
-//         </a>
-//       </li>
-//       <li className='nav-item'>
-//         <a className='nav-link' href='/logout'>
-//           Log out
-//         </a>
-//       </li>
-//     </ul>
-//   </div>
-//   <div className='search-bar'>
-//     <SearchBar />
-//   </div>
-// </nav>
