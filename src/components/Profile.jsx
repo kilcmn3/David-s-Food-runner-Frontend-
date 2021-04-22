@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import * as requests from '../containers/requests';
 import { Form } from 'react-bootstrap';
 import { CONTAINER, MYFORM, BUTTON } from '../styledcomponent/styles';
-import Navheaders from './Navheaders';
+import { Navbars } from '../exportComponents';
 
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
@@ -13,7 +13,7 @@ const saltRounds = 10;
 const Profile = (props) => {
   return (
     <Fragment>
-      <Navheaders />
+      <Navbars />
       <CONTAINER>
         <h1>Profile page</h1>
         <Formik
@@ -27,8 +27,6 @@ const Profile = (props) => {
                 .then((response) => response.json())
                 .then((data) => {
                   alert('Update complete!');
-                  // localStorage.setItem("userid", data.id)
-                  // return props.history.push("/MainContainer");
                 });
             });
           }}
