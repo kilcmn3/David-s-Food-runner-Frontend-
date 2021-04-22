@@ -14,6 +14,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const LogIn = (props) => {
+  console.log(props);
   return (
     <CONTAINER>
       <h1>David's Food Runner</h1>
@@ -29,7 +30,6 @@ const LogIn = (props) => {
               .then((response) => response.json())
               .then((data) => {
                 if (data) {
-                  console.log('hello');
                   localStorage.setItem('userid', data.id);
                   return props.history.push('/MainContainer');
                 } else {
