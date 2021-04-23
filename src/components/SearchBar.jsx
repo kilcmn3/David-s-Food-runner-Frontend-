@@ -1,8 +1,6 @@
 import React from 'react';
 import { Form, FormControl, Button } from 'react-bootstrap';
 
-import * as requests from '../containers/requests';
-
 const SearchBar = (props) => {
   const { handleSubmit, handleChange, search } = props;
 
@@ -11,7 +9,7 @@ const SearchBar = (props) => {
       <FormControl
         type='text'
         placeholder='Search'
-        onChange={(e) => handleChange(e.target.value)}
+        onChange={(e) => handleChange(e)}
         value={search}
         className='mr-sm-2'
       />
@@ -19,25 +17,6 @@ const SearchBar = (props) => {
         Submit
       </Button>
     </Form>
-
-    // <Container>
-    //   <Row className='justify-content-md-center'>
-    //     <Col></Col>
-    //     <Col></Col>
-    //     <Col>
-    //       <Form inline>
-    //         <Form.Group controlId='formInlineName'>
-    //           <Form.Control
-    //             type='text'
-    //             placeholder='search restaurant..'
-
-    //           />
-    //         </Form.Group>
-    //         <Button type='submit'>🔍</Button>
-    //       </Form>
-    //     </Col>
-    //   </Row>
-    // </Container>
   );
 };
 

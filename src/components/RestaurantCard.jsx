@@ -3,23 +3,22 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 const RestaurantCard = (props) => {
   let { name, phone, location, photos } = props.restaurant;
-  location = JSON.parse(location);
   let address =
-    location.address1 +
+    JSON.parse(location).address1 +
     ', ' +
-    location.city +
+    JSON.parse(location).city +
     ' ' +
-    location.state +
+    JSON.parse(location).state +
     ' ' +
-    location.zip_code;
+    JSON.parse(location).zip_code;
 
   return (
     <Container>
       <Row>
         <Col md={12} sm={5}>
-          <div onClick={(event) => props.handleClick(props.restaurant)}>
+          <div onClick={() => props.handleClick(props.restaurant)}>
             <a
-              href='#'
+              href={`restaurants/${props.restaurant.id}`}
               className='list-group-item list-group-item-action d-flex justify-content-between align-items-center'>
               <div className='flex-column'>
                 <h4> {name}</h4>
