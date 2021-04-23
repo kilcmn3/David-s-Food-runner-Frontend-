@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { useParams } from 'react-router-dom';
 import { Figure } from 'react-bootstrap';
-import { ReviewContainer, Navbars } from '../exportComponents';
+import { ReviewContainer } from '../exportComponents';
 import * as requests from './requests';
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -124,8 +124,7 @@ export default class RestaurantContainer extends Component {
 
   render() {
     return (
-      <Fragment>
-        <Navbars />
+      <>
         <div className='restaurant container'>
           {this.renderRestaurant()}
           <ReviewContainer
@@ -136,7 +135,7 @@ export default class RestaurantContainer extends Component {
             handleDelete={this.handleDelete}
           />
         </div>
-      </Fragment>
+      </>
     );
   }
 }

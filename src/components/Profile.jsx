@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -12,7 +12,7 @@ const saltRounds = 10;
 
 const Profile = (props) => {
   return (
-    <Fragment>
+    <>
       <Navbars />
       <CONTAINER>
         <h1>Profile page</h1>
@@ -112,7 +112,7 @@ const Profile = (props) => {
           }}
         </Formik>
       </CONTAINER>
-    </Fragment>
+    </>
   );
 };
 

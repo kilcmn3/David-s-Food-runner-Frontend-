@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import {
-  RestaurantsListContainer,
-  SearchContainer,
-  Navbars,
-} from '../exportComponents';
+import { RestaurantsListContainer, Navbars } from '../exportComponents';
 import * as requests from './requests';
 
 import { withRouter } from 'react-router-dom';
@@ -14,7 +10,6 @@ class MainContainer extends Component {
     this.state = {
       search: '',
       searchDatas: [],
-      restContToggle: false,
       restaurant: null,
     };
   }
@@ -24,10 +19,7 @@ class MainContainer extends Component {
 
   handleClick = (restaurant) => {
     this.setState(
-      {
-        restContToggle: !this.state.restContToggle,
-        restaurantId: restaurant.id,
-      },
+      { restaurantId: restaurant.id },
       this.props.history.push({ pathname: `/restaurants/${restaurant.id}` })
     );
   };
@@ -50,7 +42,6 @@ class MainContainer extends Component {
     return (
       <div className='MainContainer'>
         <Navbars />
-        <SearchContainer handleClick={this.handleClick} />
         <RestaurantsListContainer
           search={this.state.search}
           searchDatas={this.state.searchDatas}
