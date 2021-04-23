@@ -34,7 +34,7 @@ const RestaurantsListContainer = (props) => {
         itemClass='page-item'
         linkClass='page-link'
         activePage={activePage}
-        itemsCountPerPage={itemsCountPerPage}
+        itemsCountPerPage={10}
         totalItemsCount={props.restaurants.length}
         pageRangeDisplayed={Math.ceil(props.restaurants.length / 10)}
         onChange={(pageNumber) => setActivePage(pageNumber)}
