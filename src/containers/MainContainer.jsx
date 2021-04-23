@@ -35,7 +35,7 @@ class MainContainer extends Component {
       .searchRestaurants(this.state.search)
       .then((response) => response.json())
       .then((restaurants) =>
-        this.setState({ restaurants, shouldUpdate: true })
+        this.setState({ restaurants, shouldUpdate: !this.state.shouldUpdate })
       );
   };
 
