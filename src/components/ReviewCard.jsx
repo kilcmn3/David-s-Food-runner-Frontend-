@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 export default class ReviewCard extends Component {
   constructor(props) {
@@ -18,12 +18,20 @@ export default class ReviewCard extends Component {
   render() {
     const { id, user_id, comment, user_email } = this.props.datas;
     return (
-      <Container>
-        <Row>
-          <Col>
-            <Col>
-              <div className='review card' id={id}>
-                <p className='h3' onClick={this.handleClick} id={user_id}>
+
+        <Form>
+          <Form.Group controlId='formBasicEmail'>
+            id={id}>
+            <Form.Control
+              type='comment'
+              placeholder='Write Your Comment Here'
+            />
+          </Form.Group>
+          <Button variant='primary' type='submit'>
+            Submit
+          </Button>
+        </Form>
+        {/* <p className='h3' onClick={this.handleClick} id={user_id}>
                   {comment}
                 </p>
                 <p>
@@ -31,12 +39,8 @@ export default class ReviewCard extends Component {
                 </p>
                 {this.state.buttonToggle ? (
                   <button onClick={this.props.handleDelete}>Delete</button>
-                ) : null}
-              </div>
-            </Col>
-          </Col>
-        </Row>
-      </Container>
+                ) : null} */}
+
     );
   }
 }
