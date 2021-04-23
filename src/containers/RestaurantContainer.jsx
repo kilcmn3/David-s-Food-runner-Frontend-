@@ -1,43 +1,36 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Figure } from 'react-bootstrap';
 import { ReviewContainer } from '../exportComponents';
 import * as requests from './requests';
 import { Container, Row, Col } from 'react-bootstrap';
 
-export default class RestaurantContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      comment: '',
-      comments: [],
-      restaurant: null,
-      user: null,
-    };
-  }
+const RestaurantContainer = (props) => {
+  const params = useParams();
 
-  componentDidMount() {
-    let url = window.location.href.split('/');
+  const [comment, setComment] = useState('');
+  const [comments, setComments] = useState([]);
+  const [restaurant, setRestaurant] = useState(null);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
     requests
-      .fetchOneRest(url[url.length - 1])
+      .fetchOneRest(params.id)
       .then((response) => response.json())
-      .then((restaurant) => {
-        this.setState({
-          comments: restaurant.comments,
-          restaurant: restaurant,
-        });
+      .then((data) => {
+        setComments(data.comments);
+        setRestaurant(data);
       });
-  }
 
-  renderRestaurant = () => {
-    if (this.state.restaurant) {
-      const {
-        photos,
-        name,
-        location,
-        categories,
-        phone,
-      } = this.state.restaurant;
+    requests
+      .fetchUserById(localStorage.getItem('userid'))
+      .then((response) => response.json())
+      .then((user) => setUser(user));
+  }, []);
+
+  const renderRestaurant = () => {
+    if (restaurant) {
+      const { photos, name, location, categories, phone } = restaurant;
       let parseLocation = JSON.parse(location);
       let alias = JSON.parse(categories[0])['alias'];
       const address =
@@ -76,61 +69,50 @@ export default class RestaurantContainer extends Component {
     }
   };
 
-  handleChange = (event) => {
-    this.setState({ comment: event.target.value });
-  };
-
-  handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     let datas = {
-      comment: this.state.comment,
+      comment: comment,
       user_id: localStorage.getItem('userid'),
-      restaurant_id: this.state.restaurant.id,
-      user_email: this.state.user.email,
+      restaurant_id: restaurant.id,
+      user_email: user.email,
     };
     requests
       .postComments(datas)
       .then((response) => response.json())
       .then((data) => {
         this.setState({
-          comments: [...this.state.comments, data],
+          comments: [...comments, data],
           comment: '',
         });
       });
   };
 
-  handleDelete = (event) => {
+  const handleDelete = (event) => {
     let id = event.target.parentElement.id;
-    let target = this.state.comments
-      .map((comment) => comment.id)
-      .indexOf(event.target.id);
-    let newArr = this.state.comments;
+    let target = comments.map((comment) => comment.id).indexOf(event.target.id);
+    let newArr = comments;
     newArr.splice(target, 1);
     this.setState({ comments: newArr });
 
     requests.deleteComment(id);
   };
 
-  handleComment = (event) => {
-    this.setState({ comment: event.target.value });
-  };
+  return (
+    <>
+      <div className='restaurant container'>
+        {renderRestaurant()}
+        <ReviewContainer
+          comment={comment}
+          comments={comments}
+          handleChange={(e) => setComment(e.target.value)}
+          handleSubmit={handleSubmit}
+          handleDelete={handleDelete}
+        />
+      </div>
+    </>
+  );
+};
 
-  render() {
-    console.log(params);
-    return (
-      <>
-        <div className='restaurant container'>
-          {this.renderRestaurant()}
-          <ReviewContainer
-            comment={this.state.comment}
-            comments={this.state.comments}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-            handleDelete={this.handleDelete}
-          />
-        </div>
-      </>
-    );
-  }
-}
+export default RestaurantContainer;
