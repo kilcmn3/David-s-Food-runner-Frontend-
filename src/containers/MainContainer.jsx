@@ -8,13 +8,16 @@ class MainContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: '',
-      searchDatas: [],
+      restaurants: [],
       restaurant: null,
     };
   }
+
   componentDidMount() {
-    this.setState({ restContToggle: false });
+    requests
+      .searchRestaurants('pizza')
+      .then((response) => response.json())
+      .then((restaurants) => this.setState({ restaurants }));
   }
 
   handleClick = (restaurant) => {
@@ -24,28 +27,13 @@ class MainContainer extends Component {
     );
   };
 
-  handleChange = (event) => {
-    this.setState({ search: event.target.value });
-  };
-
-  handleSubmit = (event) => {
-    console.log(event);
-    event.preventDefault();
-
-    requests
-      .searchRestaurants(this.state.search)
-      .then((response) => response.json())
-      .then((searchDatas) => this.setState({ searchDatas, search: '' }));
-  };
-
   render() {
     return (
       <div className='MainContainer'>
         <Navbars />
         <RestaurantsListContainer
-          search={this.state.search}
-          searchDatas={this.state.searchDatas}
           handleClick={this.props.handleClick}
+          restaurants={this.state.restaurants}
         />
       </div>
     );
