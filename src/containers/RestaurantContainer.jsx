@@ -21,11 +21,15 @@ const RestaurantContainer = (props) => {
         setComments(data.comments);
         setRestaurant(data);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
+  useEffect(() => {
     requests
       .fetchUserById(localStorage.getItem('userid'))
       .then((response) => response.json())
       .then((user) => setUser(user));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const renderRestaurant = () => {
