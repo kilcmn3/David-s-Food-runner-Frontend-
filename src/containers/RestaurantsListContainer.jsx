@@ -1,58 +1,55 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import Pagination from 'react-js-pagination';
 
 import RestaurantCard from '../components/RestaurantCard';
 
-export default class RestaurantsListContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      startIndex: 0,
-      activePage: 0,
-    };
-  }
+const RestaurantsListContainer = (props) => {
+  const [activePage, setActivePage] = useState(1);
+  const [itemsCountPerPage, setItemsCountPerPage] = useState(10);
 
-  renderRestaurants = () => {
-    return this.props.restaurants.map((restaurant) => {
+  useEffect(() => {
+    setActivePage(1);
+  }, [props.shouldUpdate]);
+
+  const renderRestaurants = () => {
+    let offSet = (activePage - 1) * itemsCountPerPage;
+    let restaurantPerPage = props.restaurants
+      .slice(offSet)
+      .slice(0, itemsCountPerPage);
+
+    return restaurantPerPage.map((restaurant, index) => {
       return (
         <RestaurantCard
-          key={restaurant.id}
+          key={index}
           restaurant={restaurant}
-          handleClick={this.props.handleClick}
+          handleClick={props.handleClick}
         />
       );
     });
   };
 
-  handlePageChange = (pageNumber) => {
-    let initialIndex;
-
-    if (pageNumber > this.state.activePage) {
-      initialIndex = this.state.startIndex + pageNumber * 5;
-    } else if (pageNumber === 1) {
-      initialIndex = 0;
-    } else {
-      initialIndex = this.state.initialIndex - 5;
-    }
-    this.setState({ activePage: pageNumber, initialIndex });
+  const renderPagination = () => {
+    return (
+      <Pagination
+        itemClass='page-item'
+        linkClass='page-link'
+        activePage={activePage}
+        itemsCountPerPage={itemsCountPerPage}
+        totalItemsCount={props.restaurants.length}
+        pageRangeDisplayed={Math.ceil(props.restaurants.length / 10)}
+        onChange={(pageNumber) => setActivePage(pageNumber)}
+      />
+    );
   };
 
-  render() {
-    return this.props.restaurants.length !== undefined ? (
-      <div className='restaurant list container'>
-        {this.renderRestaurants()}
-        <Pagination
-          itemClass='page-item'
-          linkClass='page-link'
-          activePage={this.state.activePage}
-          itemsCountPerPage={10}
-          totalItemsCount={this.props.restaurants.length}
-          pageRangeDisplayed={5}
-          onChange={this.handlePageChange}
-        />
-      </div>
-    ) : (
-      <div></div>
-    );
-  }
-}
+  return props.restaurants.length !== undefined ? (
+    <div className='restaurant list container'>
+      {renderRestaurants()}
+      {renderPagination()}
+    </div>
+  ) : (
+    <div></div>
+  );
+};
+
+export default RestaurantsListContainer;

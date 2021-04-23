@@ -11,7 +11,7 @@ const SearchBar = (props) => {
       <FormControl
         type='text'
         placeholder='Search'
-        onChange={(e) => handleChange(e.target.value)}
+        onChange={(e) => handleChange(e)}
         value={search}
         className='mr-sm-2'
       />

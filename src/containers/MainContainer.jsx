@@ -10,7 +10,7 @@ class MainContainer extends Component {
     this.state = {
       search: '',
       restaurants: [],
-      restaurant: null,
+      shouldUpdate: false,
     };
   }
 
@@ -34,11 +34,13 @@ class MainContainer extends Component {
     requests
       .searchRestaurants(this.state.search)
       .then((response) => response.json())
-      .then((restaurants) => this.setState({ restaurants }));
+      .then((restaurants) =>
+        this.setState({ restaurants, shouldUpdate: true })
+      );
   };
 
-  handleChange = (value) => {
-    this.setState({ search: value });
+  handleChange = (event) => {
+    this.setState({ search: event.target.value });
   };
 
   render() {
@@ -52,6 +54,7 @@ class MainContainer extends Component {
         <RestaurantsListContainer
           handleClick={this.props.handleClick}
           restaurants={this.state.restaurants}
+          shouldUpdate={this.state.shouldUpdate}
         />
       </div>
     );
