@@ -18,7 +18,7 @@ const RestaurantCard = (props) => {
         <Col md={12} sm={5}>
           <div onClick={() => props.handleClick(props.restaurant)}>
             <a
-              href='#'
+              href={`restaurants/${props.restaurant.id}`}
               className='list-group-item list-group-item-action d-flex justify-content-between align-items-center'>
               <div className='flex-column'>
                 <h4> {name}</h4>

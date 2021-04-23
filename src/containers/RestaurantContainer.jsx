@@ -16,8 +16,6 @@ export default class RestaurantContainer extends Component {
     };
   }
 
-  // params = new useParams();
-
   componentDidMount() {
     let url = window.location.href.split('/');
     requests
@@ -29,10 +27,6 @@ export default class RestaurantContainer extends Component {
           restaurant: restaurant,
         });
       });
-    // requests
-    //   .fetchUserById(localStorage.getItem('userid'))
-    //   .then((response) => response.json())
-    //   .then((user) => this.setState({ user }));
   }
 
   renderRestaurant = () => {
@@ -123,6 +117,7 @@ export default class RestaurantContainer extends Component {
   };
 
   render() {
+    console.log(params);
     return (
       <>
         <div className='restaurant container'>
