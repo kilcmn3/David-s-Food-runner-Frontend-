@@ -28,7 +28,7 @@ const SignUp = (props) => {
                 } else {
                   localStorage.setItem('userid', data.id);
                   alert("Welcome to David's Food runner!");
-                  return props.history.push('/login');
+                  return props.history.push('/');
                 }
               });
           });

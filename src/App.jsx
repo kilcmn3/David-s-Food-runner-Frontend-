@@ -14,7 +14,6 @@ import './App.css';
 const App = () => {
   return (
     <Switch>
-      <Route path='/login' component={LogIn} />
       <Route path='/logout' component={Logout} />
       <Route path='/signup' component={SignUp} />
       <Route path='/home' component={MainContainer} />
