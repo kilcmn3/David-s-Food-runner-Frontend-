@@ -1,26 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, FormControl, Button } from 'react-bootstrap';
 
 import * as requests from '../containers/requests';
 
-const SearchBar = () => {
-  const [search, setSearch] = useState('');
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    requests
-      .searchRestaurants(search)
-      .then((response) => response.json())
-      .then((datas) => this.setState({ datas, search: '' }));
-  };
+const SearchBar = (props) => {
+  const { handleSubmit, handleChange, search } = props;
 
   return (
-    <Form inline onSubmit={handleSubmit}>
+    <Form inline onSubmit={(e) => handleSubmit(e)}>
       <FormControl
         type='text'
         placeholder='Search'
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => handleChange(e.target.value)}
         value={search}
         className='mr-sm-2'
       />

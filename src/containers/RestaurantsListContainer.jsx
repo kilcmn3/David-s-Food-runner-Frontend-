@@ -23,17 +23,18 @@ export default class RestaurantsListContainer extends Component {
       );
     });
   };
-  F;
+
   handlePageChange = (pageNumber) => {
-    let startIndex;
+    let initialIndex;
+
     if (pageNumber > this.state.activePage) {
-      startIndex = this.state.startIndex + pageNumber * 5;
+      initialIndex = this.state.startIndex + pageNumber * 5;
     } else if (pageNumber === 1) {
-      startIndex = 0;
+      initialIndex = 0;
     } else {
-      startIndex = this.state.startIndex - 5;
+      initialIndex = this.state.initialIndex - 5;
     }
-    this.setState({ activePage: pageNumber, startIndex });
+    this.setState({ activePage: pageNumber, initialIndex });
   };
 
   render() {

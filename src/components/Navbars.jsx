@@ -5,6 +5,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import { SearchBar } from '../exportComponents';
 
 const Navbars = (props) => {
+  const { handleSubmit, handleChange, search } = props;
+
   return (
     <Navbar bg='light' expand='lg'>
       <Navbar.Brand href='/home'>Home</Navbar.Brand>
@@ -14,7 +16,11 @@ const Navbars = (props) => {
           <Nav.Link href='/profile'>Profile</Nav.Link>
           <Nav.Link href='/logout'>Logout</Nav.Link>
         </Nav>
-        <SearchBar />
+        <SearchBar
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          search={search}
+        />
       </Navbar.Collapse>
     </Navbar>
   );
