@@ -13,13 +13,12 @@ export default class SearchContainer extends Component {
   }
 
   handleChange = (event) => {
-    console.log(event.target.value);
     this.setState({ search: event.target.value });
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state.search);
+
     requests
       .searchRestaurants(this.state.search)
       .then((response) => response.json())

@@ -99,7 +99,6 @@ export default class RestaurantContainer extends Component {
       .postComments(datas)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         this.setState({
           comments: [...this.state.comments, data],
           comment: '',
