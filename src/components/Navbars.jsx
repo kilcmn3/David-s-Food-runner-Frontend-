@@ -17,10 +17,7 @@ const Navbars = (props) => {
           <Nav.Link href='/profile'>Profile</Nav.Link>
           <Nav.Link href='/logout'>Logout</Nav.Link>
         </Nav>
-        <Form inline>
-          <FormControl type='text' placeholder='Search' className='mr-sm-2' />
-          <Button variant='outline-success'>Search</Button>
-        </Form>
+        <SearchBar />
       </Navbar.Collapse>
     </Navbar>
   );

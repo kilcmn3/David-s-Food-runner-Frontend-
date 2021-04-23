@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RestaurantsListContainer from './RestaurantsListContainer';
-// import SearchBar from '../components/SearchBar'
+import SearchBar from '../components/SearchBar';
 import * as requests from './requests';
 
 export default class SearchContainer extends Component {
@@ -17,6 +17,7 @@ export default class SearchContainer extends Component {
   };
 
   handleSubmit = (event) => {
+    console.log(event);
     event.preventDefault();
 
     requests
@@ -27,7 +28,11 @@ export default class SearchContainer extends Component {
   render() {
     return (
       <div className='searchContainer'>
-        {/* <SearchBar handleChange={this.handleChange} handleSubmit={this.handleSubmit} search={this.state.search} /> */}
+        {/* <SearchBar
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          search={this.state.search}
+        /> */}
         <RestaurantsListContainer
           search={this.state.search}
           searchDatas={this.state.searchDatas}

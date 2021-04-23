@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
-import { SearchContainer, Navbars } from '../exportComponents';
+import {
+  RestaurantsListContainer,
+  SearchContainer,
+  Navbars,
+} from '../exportComponents';
+import * as requests from './requests';
+
 import { withRouter } from 'react-router-dom';
 
 class MainContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      search: '',
+      searchDatas: [],
       restContToggle: false,
       restaurant: null,
     };
@@ -23,13 +31,31 @@ class MainContainer extends Component {
       this.props.history.push({ pathname: `/restaurants/${restaurant.id}` })
     );
   };
+
+  handleChange = (event) => {
+    this.setState({ search: event.target.value });
+  };
+
+  handleSubmit = (event) => {
+    console.log(event);
+    event.preventDefault();
+
+    requests
+      .searchRestaurants(this.state.search)
+      .then((response) => response.json())
+      .then((searchDatas) => this.setState({ searchDatas, search: '' }));
+  };
+
   render() {
     return (
       <div className='MainContainer'>
-        {!this.state.restContToggle ? <Navbars /> : null}
-        {!this.state.restContToggle ? (
-          <SearchContainer handleClick={this.handleClick} />
-        ) : null}
+        <Navbars />
+        <SearchContainer handleClick={this.handleClick} />
+        <RestaurantsListContainer
+          search={this.state.search}
+          searchDatas={this.state.searchDatas}
+          handleClick={this.props.handleClick}
+        />
       </div>
     );
   }
