@@ -1,35 +1,58 @@
 import React, { Component } from 'react';
-import { SearchContainer, Navbars } from '../exportComponents';
+import { RestaurantsListContainer, Navbars } from '../exportComponents';
+import * as requests from './requests';
+
 import { withRouter } from 'react-router-dom';
 
 class MainContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      restContToggle: false,
+      search: '',
+      restaurants: [],
       restaurant: null,
     };
   }
+
   componentDidMount() {
-    this.setState({ restContToggle: false });
+    requests
+      .searchRestaurants('pizza')
+      .then((response) => response.json())
+      .then((restaurants) => this.setState({ restaurants }));
   }
 
   handleClick = (restaurant) => {
     this.setState(
-      {
-        restContToggle: !this.state.restContToggle,
-        restaurantId: restaurant.id,
-      },
+      { restaurantId: restaurant.id },
       this.props.history.push({ pathname: `/restaurants/${restaurant.id}` })
     );
   };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    requests
+      .searchRestaurants(this.state.search)
+      .then((response) => response.json())
+      .then((restaurants) => this.setState({ restaurants }));
+  };
+
+  handleChange = (value) => {
+    this.setState({ search: value });
+  };
+
   render() {
     return (
       <div className='MainContainer'>
-        {!this.state.restContToggle ? <Navbars /> : null}
-        {!this.state.restContToggle ? (
-          <SearchContainer handleClick={this.handleClick} />
-        ) : null}
+        <Navbars
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+          search={this.state.search}
+        />
+        <RestaurantsListContainer
+          handleClick={this.props.handleClick}
+          restaurants={this.state.restaurants}
+        />
       </div>
     );
   }

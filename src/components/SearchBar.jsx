@@ -1,27 +1,43 @@
 import React from 'react';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Form, FormControl, Button } from 'react-bootstrap';
+
+import * as requests from '../containers/requests';
 
 const SearchBar = (props) => {
+  const { handleSubmit, handleChange, search } = props;
+
   return (
-    <Container>
-      <Row className='justify-content-md-center'>
-        <Col></Col>
-        <Col></Col>
-        <Col>
-          <Form inline onSubmit={props.handleSubmit}>
-            <Form.Group controlId='formInlineName'>
-              <Form.Control
-                type='text'
-                placeholder='search restaurant..'
-                onChange={props.handleChange}
-                value={props.search}
-              />
-            </Form.Group>
-            <Button type='submit'>🔍</Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+    <Form inline onSubmit={(e) => handleSubmit(e)}>
+      <FormControl
+        type='text'
+        placeholder='Search'
+        onChange={(e) => handleChange(e.target.value)}
+        value={search}
+        className='mr-sm-2'
+      />
+      <Button type='submit' variant='outline-success'>
+        Submit
+      </Button>
+    </Form>
+
+    // <Container>
+    //   <Row className='justify-content-md-center'>
+    //     <Col></Col>
+    //     <Col></Col>
+    //     <Col>
+    //       <Form inline>
+    //         <Form.Group controlId='formInlineName'>
+    //           <Form.Control
+    //             type='text'
+    //             placeholder='search restaurant..'
+
+    //           />
+    //         </Form.Group>
+    //         <Button type='submit'>🔍</Button>
+    //       </Form>
+    //     </Col>
+    //   </Row>
+    // </Container>
   );
 };
 
