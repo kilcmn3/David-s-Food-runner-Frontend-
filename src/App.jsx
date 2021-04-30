@@ -4,7 +4,6 @@ import {
   MainContainer,
   RestaurantContainer,
   LogInContainer,
-  LogIn,
   SignUp,
   Profile,
   Logout,
