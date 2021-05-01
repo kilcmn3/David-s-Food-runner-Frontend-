@@ -5,17 +5,17 @@ import RestaurantCard from '../components/RestaurantCard';
 
 const RestaurantsListContainer = (props) => {
   const [activePage, setActivePage] = useState(1);
-  const [itemsCountPerPage, setItemsCountPerPage] = useState(10);
+  const _itemsCountPerPage = 10;
 
   useEffect(() => {
     setActivePage(1);
   }, [props.shouldUpdate]);
 
   const renderRestaurants = () => {
-    let offSet = (activePage - 1) * itemsCountPerPage;
+    let offSet = (activePage - 1) * _itemsCountPerPage;
     let restaurantPerPage = props.restaurants
       .slice(offSet)
-      .slice(0, itemsCountPerPage);
+      .slice(0, _itemsCountPerPage);
 
     return restaurantPerPage.map((restaurant, index) => {
       return (
@@ -34,7 +34,7 @@ const RestaurantsListContainer = (props) => {
         itemClass='page-item'
         linkClass='page-link'
         activePage={activePage}
-        itemsCountPerPage={10}
+        _itemsCountPerPage={10}
         totalItemsCount={props.restaurants.length}
         pageRangeDisplayed={Math.ceil(props.restaurants.length / 10)}
         onChange={(pageNumber) => setActivePage(pageNumber)}
