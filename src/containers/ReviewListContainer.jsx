@@ -16,15 +16,7 @@ const ReviewListContainer = (props) => {
     }
   };
 
-  return (
-    <div className='container'>
-      <div className='row'>
-        <div className='col-12 col-sm-8 col-lg-5'>
-          <ul className='list-group'>{renderComment()}</ul>
-        </div>
-      </div>
-    </div>
-  );
+  return <>{renderComment()}</>;
 };
 
 export default ReviewListContainer;
