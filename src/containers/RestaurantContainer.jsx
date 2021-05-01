@@ -1,3 +1,8 @@
+/**
+ * TODO: Re-render after comments is created and delted
+ *
+ */
+
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Figure } from 'react-bootstrap';
@@ -86,10 +91,8 @@ const RestaurantContainer = (props) => {
       .postComments(datas)
       .then((response) => response.json())
       .then((data) => {
-        this.setState({
-          comments: [...comments, data],
-          comment: '',
-        });
+        setComments(data);
+        setComment('');
       });
   };
 
@@ -98,7 +101,7 @@ const RestaurantContainer = (props) => {
     let target = comments.map((comment) => comment.id).indexOf(event.target.id);
     let newArr = comments;
     newArr.splice(target, 1);
-    this.setState({ comments: newArr });
+    setComments(newArr);
 
     requests.deleteComment(id);
   };
