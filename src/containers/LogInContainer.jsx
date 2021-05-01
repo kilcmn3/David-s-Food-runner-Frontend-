@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import * as requests from '../containers/requests';
 import { CONTAINER } from '../styledcomponent/styles';
 
 import { LogIn } from '../exportComponents';
-import MainContainer from './MainContainer';
 
 const LogInContainer = (props) => {
-  const [userLogin, setUserLogin] = useState(false);
-
   const bcrypt = require('bcryptjs');
   const saltRounds = 10;
   const validationSchema = Yup.object().shape({
