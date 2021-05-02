@@ -1,10 +1,9 @@
-// headers --> use these at your own discretion
-// const headers = {'Content-Type': 'application/json', 'Accepts': 'application/json'}
-// urls
 const restaurantsURL =
   'https://david-s-food-runner-backend.herokuapp.com/restaurants';
+
 const commentsURL =
   'https://david-s-food-runner-backend.herokuapp.com/comments';
+
 const usersURL = 'https://david-s-food-runner-backend.herokuapp.com/users';
 
 export const fetchRestaurants = () => fetch(restaurantsURL);
