@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
 import Pagination from 'react-js-pagination';
 
 import RestaurantCard from '../components/RestaurantCard';
@@ -19,11 +20,13 @@ const RestaurantsListContainer = (props) => {
 
     return restaurantPerPage.map((restaurant, index) => {
       return (
-        <RestaurantCard
-          key={index}
-          restaurant={restaurant}
-          handleClick={props.handleClick}
-        />
+        <Container>
+          <RestaurantCard
+            key={index}
+            restaurant={restaurant}
+            handleClick={props.handleClick}
+          />
+        </Container>
       );
     });
   };

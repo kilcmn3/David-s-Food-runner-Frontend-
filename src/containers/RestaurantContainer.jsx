@@ -5,10 +5,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Figure } from 'react-bootstrap';
+import { Container, Col, Figure, Row, Image } from 'react-bootstrap';
 import { ReviewContainer } from '../exportComponents';
 import * as requests from './requests';
-import { Container, Row, Col } from 'react-bootstrap';
 
 const RestaurantContainer = (props) => {
   const params = useParams();
@@ -56,12 +55,7 @@ const RestaurantContainer = (props) => {
           <Row>
             <Col>
               <Figure>
-                <Figure.Image
-                  width={900}
-                  height={900}
-                  alt='900x900'
-                  src={photos[0]}
-                />
+                <Image src={`${photos[0]}`} thumbnail />
                 <Figure.Caption>
                   <p>Name: {name}</p>
                   <p>Address: {address}</p>
