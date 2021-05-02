@@ -81,7 +81,7 @@ const RestaurantContainer = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    let datas = {
+    const datas = {
       comment: comment,
       user_id: localStorage.getItem('userid'),
       restaurant_id: restaurant.id,
@@ -91,6 +91,7 @@ const RestaurantContainer = (props) => {
       .postComments(datas)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setComments(data);
         setComment('');
       });
