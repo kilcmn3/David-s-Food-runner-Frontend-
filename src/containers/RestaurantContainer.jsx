@@ -6,7 +6,6 @@ import * as requests from './requests';
 
 const RestaurantContainer = (props) => {
   const [restaurant, setRestaurant] = useState(null);
-  const [user, setUser] = useState(null);
 
   const params = useParams();
 
@@ -17,14 +16,6 @@ const RestaurantContainer = (props) => {
       .then((data) => {
         setRestaurant(data);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    requests
-      .fetchUserById(localStorage.getItem('userid'))
-      .then((response) => response.json())
-      .then((user) => setUser(user));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -69,7 +60,7 @@ const RestaurantContainer = (props) => {
       <div className='restaurant container'>
         {renderRestaurant()}
 
-        <ReviewListContainer restaurant={restaurant} user={user} />
+        <ReviewListContainer restaurant={restaurant} />
       </div>
     </>
   );

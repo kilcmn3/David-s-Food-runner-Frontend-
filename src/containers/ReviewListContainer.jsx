@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import * as requests from './requests';
 import { ReviewCard, ReviewForm } from '../exportComponents';
 
@@ -7,6 +8,25 @@ const ReviewListContainer = (props) => {
   const [comments, setComments] = useState(
     props.restaurant !== null ? props.restaurant.comments : []
   );
+  const [user, setUser] = useState(null);
+
+  const params = useParams();
+
+  useEffect(() => {
+    requests
+      .fetchUserById(localStorage.getItem('userid'))
+      .then((response) => response.json())
+      .then((user) => setUser(user));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    console.log(params.id);
+    requests
+      .fetchComments(params.id)
+      .then((response) => response.json())
+      .then((datas) => setComments(datas));
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,20 +36,20 @@ const ReviewListContainer = (props) => {
     copyComments.push(comment);
     setComments(copyComments);
 
-    // const datas = {
-    //   comment: comment,
-    //   user_id: localStorage.getItem('userid'),
-    //   restaurant_id: props.restaurant.id,
-    //   user_email: props.user.email,
-    // };
-    // requests
-    //   .postComments(datas)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     setComments(data);
-    //     setComment('');
-    //   });
+    const datas = {
+      comment: comment,
+      user_id: localStorage.getItem('userid'),
+      restaurant_id: props.restaurant.id,
+      user_email: user.email,
+    };
+    requests
+      .postComments(datas)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setComments(data);
+        setComment('');
+      });
   };
 
   const handleChange = (event) => {
@@ -50,11 +70,15 @@ const ReviewListContainer = (props) => {
     if (comments === null) {
       return <div></div>;
     } else if (comments.length === 1) {
-      return <ReviewCard datas={comment} handleDelete={handleDelete} />;
+      return <ReviewCard userComment={comment} handleDelete={handleDelete} />;
     } else {
-      return comments.map((data, index) => {
+      return comments.map((userComment, index) => {
         return (
-          <ReviewCard key={index} datas={data} handleDelete={handleDelete} />
+          <ReviewCard
+            key={index}
+            userComment={userComment}
+            handleDelete={handleDelete}
+          />
         );
       });
     }
