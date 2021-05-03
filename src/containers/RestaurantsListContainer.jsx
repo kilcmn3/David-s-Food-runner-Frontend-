@@ -19,14 +19,7 @@ const RestaurantsListContainer = (props) => {
       .slice(0, _itemsCountPerPage);
 
     return restaurantPerPage.map((restaurant, index) => {
-      return (
-        <Container key={index}>
-          <RestaurantCard
-            restaurant={restaurant}
-            handleClick={props.handleClick}
-          />
-        </Container>
-      );
+      return <RestaurantCard key={index} restaurant={restaurant} />;
     });
   };
 
@@ -46,7 +39,7 @@ const RestaurantsListContainer = (props) => {
 
   return props.restaurants.length !== undefined ? (
     <div className='restaurant list container'>
-      {renderRestaurants()}
+      <Container>{renderRestaurants()}</Container>
       {renderPagination()}
     </div>
   ) : (

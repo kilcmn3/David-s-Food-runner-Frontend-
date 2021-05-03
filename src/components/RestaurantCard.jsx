@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, Col, Image, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Card, Col, Row } from 'react-bootstrap';
 
 const RestaurantCard = (props) => {
   let { name, phone, location, photos } = props.restaurant;
@@ -15,9 +16,9 @@ const RestaurantCard = (props) => {
   return (
     <Row className='justify-content-md-center'>
       <Col lg='12'>
-        <div onClick={() => props.handleClick(props.restaurant)}>
-          <a
-            href={`restaurants/${props.restaurant.id}`}
+        <div>
+          <Link
+            to={{ pathname: `restaurants/${props.restaurant.id}` }}
             className='list-group-item list-group-item-action d-flex justify-content-between align-items-center'>
             <div className='flex-column'>
               <h4> {name}</h4>
@@ -31,7 +32,7 @@ const RestaurantCard = (props) => {
             <div className='image-parent'>
               <Card.Img src={photos[0]} style={{ height: '200px' }} />
             </div>
-          </a>
+          </Link>
         </div>
       </Col>
     </Row>
