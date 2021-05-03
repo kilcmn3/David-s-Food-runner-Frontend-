@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Col, Figure, Row, Image } from 'react-bootstrap';
-import { ReviewListContainer, ReviewForm } from '../exportComponents';
+import { ReviewListContainer } from '../exportComponents';
 import * as requests from './requests';
 
 const RestaurantContainer = (props) => {
@@ -68,7 +68,7 @@ const RestaurantContainer = (props) => {
     <>
       <div className='restaurant container'>
         {renderRestaurant()}
-        <ReviewForm />
+
         <ReviewListContainer restaurant={restaurant} user={user} />
       </div>
     </>
