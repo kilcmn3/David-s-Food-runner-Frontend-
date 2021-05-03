@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
 import Pagination from 'react-js-pagination';
 
 import RestaurantCard from '../components/RestaurantCard';
@@ -18,13 +19,7 @@ const RestaurantsListContainer = (props) => {
       .slice(0, _itemsCountPerPage);
 
     return restaurantPerPage.map((restaurant, index) => {
-      return (
-        <RestaurantCard
-          key={index}
-          restaurant={restaurant}
-          handleClick={props.handleClick}
-        />
-      );
+      return <RestaurantCard key={index} restaurant={restaurant} />;
     });
   };
 
@@ -44,7 +39,7 @@ const RestaurantsListContainer = (props) => {
 
   return props.restaurants.length !== undefined ? (
     <div className='restaurant list container'>
-      {renderRestaurants()}
+      <Container>{renderRestaurants()}</Container>
       {renderPagination()}
     </div>
   ) : (

@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 
 const ReviewCard = (props) => {
   const [buttonToggle, setButtonToggle] = useState(false);
-  const { id, user_id, comment, user_email, created_at } = props.datas;
+  const { id, user_id, comment, user_email, created_at } = props.userComment;
 
   const handleClick = (event) => {
     if (event.target.id === localStorage.getItem('userid')) {

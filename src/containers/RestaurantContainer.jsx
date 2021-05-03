@@ -1,39 +1,21 @@
-/**
- * TODO: Re-render after comments is created and delted
- *
- */
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Figure } from 'react-bootstrap';
-import { ReviewContainer } from '../exportComponents';
+import { Container, Col, Figure, Row, Image } from 'react-bootstrap';
+import { ReviewListContainer } from '../exportComponents';
 import * as requests from './requests';
-import { Container, Row, Col } from 'react-bootstrap';
 
 const RestaurantContainer = (props) => {
-  const params = useParams();
-
-  const [comment, setComment] = useState('');
-  const [comments, setComments] = useState([]);
   const [restaurant, setRestaurant] = useState(null);
-  const [user, setUser] = useState(null);
+
+  const params = useParams();
 
   useEffect(() => {
     requests
       .fetchOneRest(params.id)
       .then((response) => response.json())
       .then((data) => {
-        setComments(data.comments);
         setRestaurant(data);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    requests
-      .fetchUserById(localStorage.getItem('userid'))
-      .then((response) => response.json())
-      .then((user) => setUser(user));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -56,12 +38,7 @@ const RestaurantContainer = (props) => {
           <Row>
             <Col>
               <Figure>
-                <Figure.Image
-                  width={900}
-                  height={900}
-                  alt='900x900'
-                  src={photos[0]}
-                />
+                <Image src={`${photos[0]}`} thumbnail />
                 <Figure.Caption>
                   <p>Name: {name}</p>
                   <p>Address: {address}</p>
@@ -78,45 +55,12 @@ const RestaurantContainer = (props) => {
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    let datas = {
-      comment: comment,
-      user_id: localStorage.getItem('userid'),
-      restaurant_id: restaurant.id,
-      user_email: user.email,
-    };
-    requests
-      .postComments(datas)
-      .then((response) => response.json())
-      .then((data) => {
-        setComments(data);
-        setComment('');
-      });
-  };
-
-  const handleDelete = (event) => {
-    let id = event.target.parentElement.id;
-    let target = comments.map((comment) => comment.id).indexOf(event.target.id);
-    let newArr = comments;
-    newArr.splice(target, 1);
-    setComments(newArr);
-
-    requests.deleteComment(id);
-  };
-
   return (
     <>
       <div className='restaurant container'>
         {renderRestaurant()}
-        <ReviewContainer
-          comment={comment}
-          comments={comments}
-          handleChange={(e) => setComment(e.target.value)}
-          handleSubmit={handleSubmit}
-          handleDelete={handleDelete}
-        />
+
+        <ReviewListContainer restaurant={restaurant} />
       </div>
     </>
   );

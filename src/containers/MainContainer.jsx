@@ -21,13 +21,6 @@ class MainContainer extends Component {
       .then((restaurants) => this.setState({ restaurants }));
   }
 
-  handleClick = (restaurant) => {
-    this.setState(
-      { restaurantId: restaurant.id },
-      this.props.history.push({ pathname: `/restaurants/${restaurant.id}` })
-    );
-  };
-
   handleSubmit = (event) => {
     event.preventDefault();
 
@@ -52,7 +45,6 @@ class MainContainer extends Component {
           search={this.state.search}
         />
         <RestaurantsListContainer
-          handleClick={this.props.handleClick}
           restaurants={this.state.restaurants}
           shouldUpdate={this.state.shouldUpdate}
         />
