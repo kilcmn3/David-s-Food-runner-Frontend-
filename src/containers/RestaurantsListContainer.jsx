@@ -20,9 +20,8 @@ const RestaurantsListContainer = (props) => {
 
     return restaurantPerPage.map((restaurant, index) => {
       return (
-        <Container>
+        <Container key={index}>
           <RestaurantCard
-            key={index}
             restaurant={restaurant}
             handleClick={props.handleClick}
           />

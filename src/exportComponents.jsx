@@ -2,7 +2,6 @@ import LogInContainer from './containers/LogInContainer';
 import MainContainer from './containers/MainContainer';
 import RestaurantContainer from './containers/RestaurantContainer';
 import RestaurantsListContainer from './containers/RestaurantsListContainer';
-import ReviewContainer from './containers/ReviewContainer';
 import ReviewListContainer from './containers/ReviewListContainer';
 import SearchBar from './components/SearchBar';
 import LogIn from './components/LogIn';
@@ -17,7 +16,6 @@ export {
   MainContainer,
   RestaurantContainer,
   RestaurantsListContainer,
-  ReviewContainer,
   ReviewListContainer,
   SearchBar,
   LogIn,
