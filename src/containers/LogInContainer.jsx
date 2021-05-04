@@ -29,6 +29,8 @@ const LogInContainer = (props) => {
               .then((data) => {
                 if (data) {
                   localStorage.setItem('userid', data.id);
+
+                  props.updateToken();
                   return props.history.push('/home');
                 } else {
                   alert('Email or Password is wrong');

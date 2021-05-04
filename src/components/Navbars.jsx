@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
+import * as requests from '../containers/requests';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 import { SearchBar } from '../exportComponents';
 
 const Navbars = (props) => {
-  const { handleSubmit, handleChange, search } = props;
+  const [search, setSearch] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    requests
+      .searchRestaurants(search)
+      .then((response) => response.json())
+      .then((restaurants) => props.updateListOfRestaurants(restaurants));
+  };
+
+  const handleChange = (event) => {
+    setSearch(event.target.value);
+  };
 
   return (
     <Navbar bg='light' expand='lg'>

@@ -1,44 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { RestaurantsListContainer, Navbars } from '../exportComponents';
-import * as requests from './requests';
+import React from 'react';
+import { RestaurantsListContainer } from '../exportComponents';
 
 import { withRouter } from 'react-router-dom';
 
-const MainContainer = () => {
-  const [search, setSearch] = useState('');
-  const [restaurants, setRestaurants] = useState([]);
-
-  useEffect(() => {
-    requests
-      .searchRestaurants('pizza')
-      .then((response) => response.json())
-      .then((restaurants) => setRestaurants(restaurants));
-  }, []);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    requests
-      .searchRestaurants(search)
-      .then((response) => response.json())
-      .then((restaurants) => setRestaurants(restaurants));
-  };
-
-  const handleChange = (event) => {
-    setSearch(event.target.value);
-  };
-
-  return restaurants.length > 1 ? (
-    <div className='MainContainer'>
-      <Navbars
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-        search={search}
-      />
-      <RestaurantsListContainer restaurants={restaurants} />
+const MainContainer = (props) => {
+  return (
+    <div className='main-container'>
+      <RestaurantsListContainer restaurants={props.restaurants} />
     </div>
-  ) : (
-    <div></div>
   );
 };
 
