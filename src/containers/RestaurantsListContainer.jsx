@@ -10,7 +10,7 @@ const RestaurantsListContainer = (props) => {
 
   useEffect(() => {
     setActivePage(1);
-  }, [props.shouldUpdate]);
+  }, []);
 
   const renderRestaurants = () => {
     let offSet = (activePage - 1) * _itemsCountPerPage;
