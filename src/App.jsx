@@ -1,56 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import {
   LogInContainer,
   Logout,
-  Navbars,
   MainContainer,
   RestaurantContainer,
   SignUp,
   Profile,
 } from './exportComponents';
-import * as requests from './containers/requests';
 import './App.css';
 
 const App = () => {
-  const [token, setToken] = useState(false);
-  const [restaurants, setRestaurants] = useState([]);
+  const [token, setToken] = useState(localStorage.getItem('userid'));
 
-  useEffect(() => {
-    requests
-      .searchRestaurants('pizza')
-      .then((response) => response.json())
-      .then((restaurants) => setRestaurants(restaurants));
-  }, []);
-
-  const updateToken = () => {
-    setToken(!token);
+  const updateToken = (bool) => {
+    setToken(bool);
   };
 
-  const updateListOfRestaurants = (list) => {
-    setRestaurants(list);
-  };
-
-  if (!token) {
-    return <LogInContainer updateToken={updateToken} />;
+  if (token === null) {
+    return (
+      <Route
+        path='/'
+        render={() => <LogInContainer updateToken={updateToken} />}
+      />
+    );
   }
   return (
-    <>
-      <Navbars updateListOfRestaurants={updateListOfRestaurants} />
-      <Switch>
-        <Route
-          path='/logout'
-          render={() => <Logout updateToken={updateToken} />}
-        />
-        <Route path='/signup' component={SignUp} />
-        <Route path='/profile' component={Profile} />
-        <Route path='/restaurants/:id' component={RestaurantContainer} />
-        <Route
-          path='/home'
-          render={() => <MainContainer restaurants={restaurants} />}
-        />
-      </Switch>
-    </>
+    <Switch>
+      <Route
+        path='/logout'
+        render={() => <Logout updateToken={updateToken} />}
+      />
+      <Route path='/signup' component={SignUp} />
+      <Route path='/profile' component={Profile} />
+      <Route path='/restaurants/:id' component={RestaurantContainer} />
+      <Route path='/home' component={MainContainer} />
+    </Switch>
   );
 };
 

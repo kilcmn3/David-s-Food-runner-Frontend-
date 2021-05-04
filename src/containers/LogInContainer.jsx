@@ -1,9 +1,9 @@
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { withRouter } from 'react-router-dom';
 import * as requests from '../containers/requests';
 import { CONTAINER } from '../styledcomponent/styles';
-
 import { LogIn } from '../exportComponents';
 
 const LogInContainer = (props) => {
@@ -13,7 +13,7 @@ const LogInContainer = (props) => {
     email: Yup.string().email().required('Required'),
     password: Yup.string().required('No password provided.'),
   });
-
+  console.log(props);
   return (
     <CONTAINER>
       <Formik
@@ -21,22 +21,23 @@ const LogInContainer = (props) => {
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(false);
+          let user;
 
           bcrypt.hash(values.password, saltRounds, (err, hash) => {
             requests
               .fetchUser(values.email)
               .then((response) => response.json())
               .then((data) => {
-                if (data) {
-                  localStorage.setItem('userid', data.id);
-
-                  props.updateToken();
-                  return props.history.push('/home');
-                } else {
-                  alert('Email or Password is wrong');
+                if (data !== 1 || data.values !== values.password) {
+                  return (user = data);
                 }
+                alert('Email or Password is wrong');
               });
           });
+          if (!user) {
+            props.history.push('/home');
+            props.updateToken();
+          }
         }}>
         {({
           values,
@@ -62,4 +63,4 @@ const LogInContainer = (props) => {
   );
 };
 
-export default LogInContainer;
+export default withRouter(LogInContainer);

@@ -1,12 +1,27 @@
-import React from 'react';
-import { RestaurantsListContainer } from '../exportComponents';
+import React, { useState, useEffect } from 'react';
+import { Navbars, RestaurantsListContainer } from '../exportComponents';
 
+import * as requests from '../containers/requests';
 import { withRouter } from 'react-router-dom';
 
 const MainContainer = (props) => {
+  const [restaurants, setRestaurants] = useState([]);
+
+  useEffect(() => {
+    requests
+      .searchRestaurants('pizza')
+      .then((response) => response.json())
+      .then((restaurants) => setRestaurants(restaurants));
+  }, []);
+
+  const updateListOfRestaurants = (list) => {
+    setRestaurants(list);
+  };
+
   return (
     <div className='main-container'>
-      <RestaurantsListContainer restaurants={props.restaurants} />
+      <Navbars updateListOfRestaurants={updateListOfRestaurants} />
+      <RestaurantsListContainer restaurants={restaurants} />
     </div>
   );
 };
