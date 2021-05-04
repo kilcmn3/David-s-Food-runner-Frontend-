@@ -19,15 +19,13 @@ const MainContainer = () => {
     event.preventDefault();
 
     requests
-      .searchRestaurants(this.state.search)
+      .searchRestaurants(search)
       .then((response) => response.json())
-      .then((restaurants) =>
-        this.setState({ restaurants, shouldUpdate: !this.state.shouldUpdate })
-      );
+      .then((restaurants) => setRestaurants(restaurants));
   };
 
   const handleChange = (event) => {
-    this.setState({ search: event.target.value });
+    setSearch(event.target.value);
   };
 
   return restaurants.length > 1 ? (
@@ -44,4 +42,5 @@ const MainContainer = () => {
   );
 };
 
+// reference for useing withRouter: https://stackoverflow.com/questions/53539314/what-is-withrouter-for-in-react-router-dom
 export default withRouter(MainContainer);
