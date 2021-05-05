@@ -21,7 +21,6 @@ const ReviewListContainer = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(params.id);
     requests
       .fetchComments(params.id)
       .then((response) => response.json())

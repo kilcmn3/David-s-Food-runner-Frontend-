@@ -6,10 +6,20 @@ import { Form } from 'react-bootstrap';
 import { CONTAINER, MYFORM, BUTTON } from '../styledcomponent/styles';
 
 const Profile = (props) => {
-  const bcrypt = require('bcryptjs');
-  const saltRounds = 10;
+  const [user, setUser] = useState(null);
 
-  return (
+  const _bcrypt = require('bcryptjs');
+  const _saltRounds = 10;
+  const _user = localStorage.getItem('userid');
+
+  useEffect(() => {
+    requests
+      .fetchUserById(localStorage.getItem('userid'))
+      .then((response) => response.json())
+      .then((user) => setUser(user));
+  });
+
+  return user !== null ? (
     <CONTAINER>
       <h1>Profile page</h1>
       <Formik
@@ -17,9 +27,9 @@ const Profile = (props) => {
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(false);
 
-          bcrypt.hash(values.password, saltRounds, function (err, hash) {
+          _bcrypt.hash(values.password, _saltRounds, function (err, hash) {
             requests
-              .postUsers({ email: values.email, password: hash })
+              .postUsers({ email: user.email, password: hash })
               .then((response) => response.json())
               .then((data) => {
                 alert('Update complete!');
@@ -53,7 +63,7 @@ const Profile = (props) => {
                 <Form.Control
                   name='email'
                   type='text'
-                  placeholder='Enter your email'
+                  placeholder={user.email}
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -104,6 +114,8 @@ const Profile = (props) => {
         }}
       </Formik>
     </CONTAINER>
+  ) : (
+    <div></div>
   );
 };
 
