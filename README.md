@@ -41,9 +41,9 @@ Live Demo: https://david-s-food-runner.herokuapp.com/
 # Improvements
 
 - [v]Sign up should be easy and understandable for a new user.
-- [v]Search results should list by closet distance.
-- [v]User can make favorite restaurants list(current the functionality is not avaliable).
-- [v]User token after login(Instead of setting toke to localStorage.. should be better way to handle it.).
+- Search results should list by closet distance.
+- User can make favorite restaurants list(current the functionality is not avaliable).
+- User token after login(Instead of setting toke to localStorage.. should be better way to handle it.).
 
 ---
 
