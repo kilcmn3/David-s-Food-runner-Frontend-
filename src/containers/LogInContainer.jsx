@@ -13,7 +13,7 @@ const LogInContainer = (props) => {
     email: Yup.string().email().required('Required'),
     password: Yup.string().required('No password provided.'),
   });
-  console.log(props);
+
   return (
     <CONTAINER>
       <Formik

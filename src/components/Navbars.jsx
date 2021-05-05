@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import * as requests from '../containers/requests';
+import { withRouter } from 'react-router';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
+import * as requests from '../containers/requests';
 import { SearchBar } from '../exportComponents';
 
 const Navbars = (props) => {
@@ -14,7 +15,11 @@ const Navbars = (props) => {
     requests
       .searchRestaurants(search)
       .then((response) => response.json())
-      .then((restaurants) => props.updateListOfRestaurants(restaurants));
+      .then((restaurants) => {
+        // props.updateListOfRestaurants([]);
+        props.updateListOfRestaurants(restaurants);
+        return props.history.push('/home');
+      });
   };
 
   const handleChange = (event) => {
@@ -40,4 +45,4 @@ const Navbars = (props) => {
   );
 };
 
-export default Navbars;
+export default withRouter(Navbars);

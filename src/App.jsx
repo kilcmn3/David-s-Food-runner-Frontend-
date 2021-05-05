@@ -25,6 +25,7 @@ const App = (props) => {
   }, []);
 
   const updateListOfRestaurants = (list) => {
+    console.log("Hey I'm listening");
     setRestaurants(list);
   };
 
