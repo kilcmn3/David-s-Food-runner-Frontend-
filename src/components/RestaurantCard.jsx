@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Col, Row } from 'react-bootstrap';
-import { array } from 'yup';
 
 const RestaurantCard = (props) => {
   const { name, phone, location, photos } = props.restaurant;
@@ -19,10 +18,11 @@ const RestaurantCard = (props) => {
       phone.substring(2, 5) +
       ') ' +
       phone.substring(5, 8) +
-      ' - ' +
+      '-' +
       phone.substring(8)
     );
   };
+
   return (
     <Row className='justify-content-md-center'>
       <Col lg='12'>
