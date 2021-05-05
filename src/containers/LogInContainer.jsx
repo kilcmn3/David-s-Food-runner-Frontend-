@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import * as requests from '../containers/requests';
 import { CONTAINER } from '../styledcomponent/styles';
 import { LogIn } from '../exportComponents';
