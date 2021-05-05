@@ -4,7 +4,6 @@ import {
   LogInContainer,
   Logout,
   Navbars,
-  MainContainer,
   RestaurantContainer,
   RestaurantsListContainer,
   SignUp,
@@ -25,7 +24,6 @@ const App = (props) => {
   }, []);
 
   const updateListOfRestaurants = (list) => {
-    console.log("Hey I'm listening");
     setRestaurants(list);
   };
 

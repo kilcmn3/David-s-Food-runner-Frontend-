@@ -1,10 +1,15 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { LogInContainer } from '../exportComponents';
+import { withRouter } from 'react-router-dom';
 
 const Logout = (props) => {
-  localStorage.getItem('userid');
-  localStorage.clear();
-  props.updateToken(null);
-  return <Redirect to='/' />;
+  useEffect(() => {
+    localStorage.removeItem('userid');
+    localStorage.clear();
+    props.updateToken(null);
+    props.history.push('/login');
+  }, []);
+
+  return <LogInContainer />;
 };
-export default Logout;
+export default withRouter(Logout);

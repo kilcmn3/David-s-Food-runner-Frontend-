@@ -7,9 +7,9 @@ import { CONTAINER } from '../styledcomponent/styles';
 import { LogIn } from '../exportComponents';
 
 const LogInContainer = (props) => {
-  const bcrypt = require('bcryptjs');
-  const saltRounds = 10;
-  const validationSchema = Yup.object().shape({
+  const _bcrypt = require('bcryptjs');
+  const _saltRounds = 10;
+  const _validationSchema = Yup.object().shape({
     email: Yup.string().email().required('Required'),
     password: Yup.string().required('No password provided.'),
   });
@@ -18,12 +18,12 @@ const LogInContainer = (props) => {
     <CONTAINER>
       <Formik
         initialValues={{ email: '', password: '' }}
-        validationSchema={validationSchema}
+        validationSchema={_validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(false);
           let user;
 
-          bcrypt.hash(values.password, saltRounds, (err, hash) => {
+          _bcrypt.hash(values.password, _saltRounds, (err, hash) => {
             requests
               .fetchUser(values.email)
               .then((response) => response.json())

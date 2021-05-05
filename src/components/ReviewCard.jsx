@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-import { Card } from 'react-bootstrap';
+import { Button, Card, Form } from 'react-bootstrap';
 
 const ReviewCard = (props) => {
   const [buttonToggle, setButtonToggle] = useState(false);
   const { id, user_id, comment, user_email, created_at } = props.userComment;
-
-  const handleClick = (event) => {
-    if (event.target.id === localStorage.getItem('userid')) {
-      setButtonToggle(!buttonToggle);
-    }
-    return false;
-  };
+  const _currentUser = parseInt(localStorage.getItem('userid'));
 
   const _timeStamp = () => {
     const currentDate = parseInt(new Date().valueOf());
     const commentDate = parseInt(new Date(created_at).valueOf());
 
     return _timeDifference(currentDate, commentDate);
+  };
+
+  const handleClick = () => {
+    if (_currentUser === user_id) {
+      setButtonToggle(!buttonToggle);
+    }
   };
 
   const _timeDifference = (current, previous) => {
@@ -52,20 +52,24 @@ const ReviewCard = (props) => {
   };
 
   return (
-    <Card id={id}>
+    <Card onClick={handleClick}>
       <Card.Header>{user_email}</Card.Header>
       <Card.Body>
-        <p className='h3' onClick={handleClick} id={user_id}>
-          {' '}
-          {comment}{' '}
-        </p>
-        <footer>
-          <small className='text-muted'>{_timeStamp()}</small>
-        </footer>
+        <Card.Text className='h3'>{comment}</Card.Text>
+
+        {buttonToggle ? (
+          <Button
+            variant='primary'
+            type='submit'
+            id={id}
+            onClick={props.handleDelete}>
+            Delete
+          </Button>
+        ) : (
+          ''
+        )}
       </Card.Body>
-      {buttonToggle ? (
-        <button onClick={props.handleDelete}>Delete</button>
-      ) : null}
+      <Card.Footer className='text-muted'>{_timeStamp()}</Card.Footer>
     </Card>
   );
 };

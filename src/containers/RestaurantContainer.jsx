@@ -33,6 +33,16 @@ const RestaurantContainer = () => {
         ' ' +
         parseLocation.zip_code;
 
+      const displayPhone = () => {
+        return (
+          phone.substring(2, 5) +
+          ') ' +
+          phone.substring(5, 8) +
+          '-' +
+          phone.substring(8)
+        );
+      };
+
       return (
         <Container>
           <Row>
@@ -42,7 +52,7 @@ const RestaurantContainer = () => {
                 <Figure.Caption>
                   <p>Name: {name}</p>
                   <p>Address: {address}</p>
-                  <p>Phone: {phone}</p>
+                  <p>Phone: {displayPhone()}</p>
                   <p>category: {alias}</p>
                 </Figure.Caption>
               </Figure>
@@ -59,7 +69,6 @@ const RestaurantContainer = () => {
     <>
       <div className='restaurant container'>
         {renderRestaurant()}
-
         <ReviewListContainer restaurant={restaurant} />
       </div>
     </>
