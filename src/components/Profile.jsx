@@ -3,9 +3,9 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import * as requests from '../containers/requests';
 import { Form } from 'react-bootstrap';
-import { CONTAINER, MYFORM, BUTTON } from '../styledcomponent/styles';
+import { BUTTON, CONTAINER, MYFORM } from '../styledcomponent/styles';
 
-const Profile = (props) => {
+const Profile = () => {
   const [user, setUser] = useState(null);
 
   const _bcrypt = require('bcryptjs');
@@ -14,7 +14,7 @@ const Profile = (props) => {
 
   useEffect(() => {
     requests
-      .fetchUserById(localStorage.getItem('userid'))
+      .fetchUserById(_user)
       .then((response) => response.json())
       .then((user) => setUser(user));
   });

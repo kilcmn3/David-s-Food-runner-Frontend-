@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
-import { MYFORM, BUTTON } from '../styledcomponent/styles';
+import { BUTTON, INPUT, MYFORM } from '../styledcomponent/styles';
 
 const LogIn = (props) => {
   const {
@@ -51,11 +50,11 @@ const LogIn = (props) => {
         <BUTTON variant='primary' type='submit' disabled={isSubmitting}>
           Sign In
         </BUTTON>
-        <Link to='/signup'>
-          <BUTTON variant='primary' type='submit'>
+        <a href='/signup'>
+          <INPUT variant='primary' type='button'>
             Register
-          </BUTTON>
-        </Link>
+          </INPUT>
+        </a>
       </MYFORM>
     </>
   );

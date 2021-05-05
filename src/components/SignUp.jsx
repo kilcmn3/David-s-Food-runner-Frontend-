@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import * as requests from '../containers/requests';
 import { Form } from 'react-bootstrap';
-import { CONTAINER, MYFORM, BUTTON } from '../styledcomponent/styles';
+import { BUTTON, CONTAINER, MYFORM } from '../styledcomponent/styles';
 
 const SignUp = (props) => {
   const bcrypt = require('bcryptjs');

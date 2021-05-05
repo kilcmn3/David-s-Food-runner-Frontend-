@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Col, Figure, Row, Image } from 'react-bootstrap';
+import { Col, Container, Figure, Image, Row } from 'react-bootstrap';
 import { ReviewListContainer } from '../exportComponents';
 import * as requests from './requests';
 
 const RestaurantContainer = () => {
   const [restaurant, setRestaurant] = useState(null);
 
-  const params = useParams();
+  const params = new useParams();
 
   useEffect(() => {
     requests

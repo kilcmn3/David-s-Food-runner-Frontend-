@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, Form } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 
 const ReviewCard = (props) => {
   const [buttonToggle, setButtonToggle] = useState(false);

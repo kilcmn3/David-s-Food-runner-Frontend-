@@ -57,3 +57,14 @@ export const BUTTON = styled(Button)`
     background: #1d3461;
   }
 `;
+
+export const INPUT = styled(Button)`
+  background: #1863ab;
+  border: none;
+  font-size: 1.2em;
+  font-weight: 400;
+  margin-left: 40px;
+  &:hover {
+    background: #1d3461;
+  }
+`;

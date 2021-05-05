@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, FormControl, Button } from 'react-bootstrap';
+import { Button, Form, FormControl } from 'react-bootstrap';
 
 const SearchBar = (props) => {
   const { handleSubmit, handleChange, search } = props;

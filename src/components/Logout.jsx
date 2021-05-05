@@ -8,6 +8,7 @@ const Logout = (props) => {
     localStorage.clear();
     props.updateToken(null);
     props.history.push('/login');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <LogInContainer />;

@@ -1,14 +1,14 @@
-const restaurantsURL =
-  'https://david-s-food-runner-backend.herokuapp.com/restaurants';
+// const restaurantsURL =
+//   'https://david-s-food-runner-backend.herokuapp.com/restaurants';
 
-const commentsURL =
-  'https://david-s-food-runner-backend.herokuapp.com/comments';
+// const commentsURL =
+//   'https://david-s-food-runner-backend.herokuapp.com/comments';
 
-const usersURL = 'https://david-s-food-runner-backend.herokuapp.com/users';
+// const usersURL = 'https://david-s-food-runner-backend.herokuapp.com/users';
 
-// const restaurantsURL = 'http://localhost:4000/restaurants';
-// const commentsURL = 'http://localhost:4000/comments';
-// const usersURL = 'http://localhost:4000/users';
+const restaurantsURL = 'http://localhost:4000/restaurants';
+const commentsURL = 'http://localhost:4000/comments';
+const usersURL = 'http://localhost:4000/users';
 
 export const fetchComments = (id) => fetch(restaurantsURL + `/comments/${id}`);
 export const fetchOneRest = (id) => fetch(restaurantsURL + `/${id}`);
