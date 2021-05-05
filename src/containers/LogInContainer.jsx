@@ -1,56 +1,72 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import * as requests from '../containers/requests';
 import { CONTAINER } from '../styledcomponent/styles';
 import { LogIn } from '../exportComponents';
 
 const LogInContainer = (props) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const _bcrypt = require('bcryptjs');
-  const _saltRounds = 10;
   const _validationSchema = Yup.object().shape({
     email: Yup.string().email().required('Required'),
-    password: Yup.string().required('No password provided.'),
+    password: Yup.string()
+      .min(8, 'Password is too short - should be 8 chars minimum.')
+      .required('No password provided.'),
   });
+
+  const handleChange = (event) => {
+    if (event.target.name === 'password') {
+      return setPassword(event.target.value);
+    }
+    if (event.target.name === 'email') {
+      return setEmail(event.target.value);
+    }
+  };
 
   return (
     <CONTAINER>
       <Formik
-        initialValues={{ email: '', password: '' }}
+        enableReinitialize={true}
+        initialValues={{ email: email, password: password }}
         validationSchema={_validationSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          setSubmitting(false);
-          let user;
+        onSubmit={(values, actions) => {
+          actions.setSubmitting(false);
 
-          _bcrypt.hash(values.password, _saltRounds, (err, hash) => {
-            requests
-              .fetchUser(values.email)
-              .then((response) => response.json())
-              .then((data) => {
-                if (data !== 1 || data.values !== values.password) {
-                  localStorage.setItem('userid', data.id);
-                  return (user = data);
-                }
+          requests
+            .fetchUser(values.email)
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.id > -1) {
+                _bcrypt.compare(
+                  values.password,
+                  data.password,
+                  function (err, result) {
+                    if (result) {
+                      const id = localStorage.removeItem('userid');
+                      localStorage.clear();
+                      localStorage.setItem('userid', data.id);
+                      props.updateToken(id);
+                      return props.history.push('/home');
+                    } else {
+                      alert('Email or Password is wrong');
+                      setPassword('');
+                    }
+                  }
+                );
+              } else {
                 alert('Email or Password is wrong');
-              });
-          });
-          if (!user) {
-            props.history.push('/home');
-            props.updateToken();
-          }
+                setPassword('');
+              }
+            });
         }}>
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting,
-        }) => (
+        {({ errors, touched, handleBlur, handleSubmit, isSubmitting }) => (
           <LogIn
-            values={values}
+            email={email}
+            password={password}
             errors={errors}
             touched={touched}
             handleChange={handleChange}

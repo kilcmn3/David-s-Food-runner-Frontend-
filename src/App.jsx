@@ -35,27 +35,33 @@ const App = () => {
     return (
       <Switch>
         <Route path='/signup' component={SignUp} />
-        <Route path='/login' component={LogInContainer} />
+        <Route
+          path='/'
+          render={() => <LogInContainer updateToken={updateToken} />}
+        />
       </Switch>
     );
+  } else {
+    return (
+      <>
+        <Navbars updateListOfRestaurants={updateListOfRestaurants} />
+        <Switch>
+          <Route
+            path='/logout'
+            render={() => <Logout updateToken={updateToken} />}
+          />
+          <Route path='/profile' component={Profile} />
+          <Route path='/restaurants/:id' component={RestaurantContainer} />
+          <Route
+            path='/home'
+            render={() => (
+              <RestaurantsListContainer restaurants={restaurants} />
+            )}
+          />
+        </Switch>
+      </>
+    );
   }
-  return (
-    <>
-      <Navbars updateListOfRestaurants={updateListOfRestaurants} />
-      <Switch>
-        <Route
-          path='/logout'
-          render={() => <Logout updateToken={updateToken} />}
-        />
-        <Route path='/profile' component={Profile} />
-        <Route path='/restaurants/:id' component={RestaurantContainer} />
-        <Route
-          path='/home'
-          render={() => <RestaurantsListContainer restaurants={restaurants} />}
-        />
-      </Switch>
-    </>
-  );
 };
 
 export default App;

@@ -14,13 +14,13 @@ Live Demo: https://david-s-food-runner.herokuapp.com/
 
 ---
 
-![Alt text](screenshots/home-1.PNG?raw=true 'Home Page ')
+![Alt text](screenshots/home.jpg?raw=true 'Home Page ')
 
 ### View Page
 
 ---
 
-![Alt text](screenshots/view-1.PNG?raw=true 'View')
+![Alt text](screenshots/view-1.jpg?raw=true 'View')
 
 ---
 
