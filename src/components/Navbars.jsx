@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { withRouter } from 'react-router';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
+import * as requests from '../containers/requests';
 import { SearchBar } from '../exportComponents';
 
 const Navbars = (props) => {
-  const { handleSubmit, handleChange, search } = props;
+  const [search, setSearch] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    requests
+      .searchRestaurants(search)
+      .then((response) => response.json())
+      .then((restaurants) => {
+        // props.updateListOfRestaurants([]);
+        props.updateListOfRestaurants(restaurants);
+        return props.history.push('/home');
+      });
+  };
+
+  const handleChange = (event) => {
+    setSearch(event.target.value);
+  };
 
   return (
     <Navbar bg='light' expand='lg'>
@@ -26,4 +45,4 @@ const Navbars = (props) => {
   );
 };
 
-export default Navbars;
+export default withRouter(Navbars);

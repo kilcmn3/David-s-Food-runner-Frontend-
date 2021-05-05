@@ -1,9 +1,9 @@
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { withRouter } from 'react-router-dom';
 import * as requests from '../containers/requests';
 import { CONTAINER } from '../styledcomponent/styles';
-
 import { LogIn } from '../exportComponents';
 
 const LogInContainer = (props) => {
@@ -21,20 +21,24 @@ const LogInContainer = (props) => {
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(false);
+          let user;
 
           bcrypt.hash(values.password, saltRounds, (err, hash) => {
             requests
               .fetchUser(values.email)
               .then((response) => response.json())
               .then((data) => {
-                if (data) {
+                if (data !== 1 || data.values !== values.password) {
                   localStorage.setItem('userid', data.id);
-                  return props.history.push('/home');
-                } else {
-                  alert('Email or Password is wrong');
+                  return (user = data);
                 }
+                alert('Email or Password is wrong');
               });
           });
+          if (!user) {
+            props.history.push('/home');
+            props.updateToken();
+          }
         }}>
         {({
           values,
@@ -60,4 +64,5 @@ const LogInContainer = (props) => {
   );
 };
 
-export default LogInContainer;
+// reference for useing withRouter: https://stackoverflow.com/questions/53539314/what-is-withrouter-for-in-react-router-dom
+export default withRouter(LogInContainer);
