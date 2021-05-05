@@ -4,7 +4,8 @@ import { BUTTON, INPUT, MYFORM } from '../styledcomponent/styles';
 
 const LogIn = (props) => {
   const {
-    values,
+    email,
+    password,
     errors,
     touched,
     handleChange,
@@ -22,7 +23,7 @@ const LogIn = (props) => {
             name='email'
             type='text'
             placeholder='Enter your email'
-            value={values.email}
+            value={email}
             onChange={handleChange}
             onBlur={handleBlur}
             className={errors.email && touched.email && 'error'}
@@ -37,7 +38,7 @@ const LogIn = (props) => {
             name='password'
             type='password'
             placeholder='Enter your password'
-            value={values.password}
+            value={password}
             onChange={handleChange}
             onBlur={handleBlur}
             className={errors.password && touched.password && 'error'}
