@@ -21,24 +21,25 @@ const LogInContainer = (props) => {
         validationSchema={_validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(false);
-          let user;
+          let user = false;
 
           _bcrypt.hash(values.password, _saltRounds, (err, hash) => {
             requests
               .fetchUser(values.email)
               .then((response) => response.json())
               .then((data) => {
-                if (data !== 1 || data.values !== values.password) {
+                if (data > -1) {
+                  localStorage.removeItem('userid');
+                  localStorage.clear();
                   localStorage.setItem('userid', data.id);
-                  return (user = data);
+                  props.updateToken();
+                  props.history.push('/home');
+                } else {
+                  alert('Email or Password is wrong');
+                  props.history.push('/');
                 }
-                alert('Email or Password is wrong');
               });
           });
-          if (!user) {
-            props.history.push('/home');
-            props.updateToken();
-          }
         }}>
         {({
           values,
