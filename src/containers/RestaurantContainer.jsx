@@ -7,7 +7,7 @@ import * as requests from './requests';
 const RestaurantContainer = () => {
   const [restaurant, setRestaurant] = useState(null);
 
-  const params = new useParams();
+  const params = useParams();
 
   useEffect(() => {
     requests

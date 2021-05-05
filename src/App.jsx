@@ -12,7 +12,7 @@ import {
 import * as requests from './containers/requests';
 import './App.css';
 
-const App = (props) => {
+const App = () => {
   const [token, setToken] = useState(localStorage.getItem('userid'));
   const [restaurants, setRestaurants] = useState([]);
 
@@ -32,7 +32,12 @@ const App = (props) => {
   };
 
   if (token === null) {
-    return <LogInContainer updateToken={updateToken} />;
+    return (
+      <Switch>
+        <Route path='/signup' component={SignUp} />
+        <Route path='/login' component={LogInContainer} />
+      </Switch>
+    );
   }
   return (
     <>
@@ -42,7 +47,6 @@ const App = (props) => {
           path='/logout'
           render={() => <Logout updateToken={updateToken} />}
         />
-        <Route path='/signup' component={SignUp} />
         <Route path='/profile' component={Profile} />
         <Route path='/restaurants/:id' component={RestaurantContainer} />
         <Route

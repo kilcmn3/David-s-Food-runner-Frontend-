@@ -8,7 +8,7 @@ const ReviewListContainer = (props) => {
   const [comments, setComments] = useState(null);
   const [user, setUser] = useState(null);
 
-  const params = new useParams();
+  const params = useParams();
 
   useEffect(() => {
     requests
