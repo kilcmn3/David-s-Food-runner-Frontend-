@@ -1,5 +1,4 @@
 import LogInContainer from './containers/LogInContainer';
-import MainContainer from './containers/MainContainer';
 import RestaurantContainer from './containers/RestaurantContainer';
 import RestaurantsListContainer from './containers/RestaurantsListContainer';
 import ReviewListContainer from './containers/ReviewListContainer';
@@ -15,7 +14,6 @@ import SignUp from './components/SignUp';
 
 export {
   LogInContainer,
-  MainContainer,
   RestaurantContainer,
   RestaurantsListContainer,
   ReviewListContainer,

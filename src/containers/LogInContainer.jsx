@@ -29,6 +29,7 @@ const LogInContainer = (props) => {
               .then((response) => response.json())
               .then((data) => {
                 if (data !== 1 || data.values !== values.password) {
+                  localStorage.setItem('userid', data.id);
                   return (user = data);
                 }
                 alert('Email or Password is wrong');
@@ -63,4 +64,5 @@ const LogInContainer = (props) => {
   );
 };
 
+// reference for useing withRouter: https://stackoverflow.com/questions/53539314/what-is-withrouter-for-in-react-router-dom
 export default withRouter(LogInContainer);

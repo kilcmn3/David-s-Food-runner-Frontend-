@@ -37,8 +37,8 @@ const RestaurantsListContainer = (props) => {
     );
   };
 
-  return props.restaurants.length !== undefined ? (
-    <div className='restaurant list container'>
+  return props.restaurants.length > 1 ? (
+    <div className='restaurant-list-container'>
       <Container>{renderRestaurants()}</Container>
       {renderPagination()}
     </div>

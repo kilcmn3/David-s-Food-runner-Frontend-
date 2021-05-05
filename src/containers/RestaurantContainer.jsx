@@ -4,7 +4,7 @@ import { Container, Col, Figure, Row, Image } from 'react-bootstrap';
 import { ReviewListContainer } from '../exportComponents';
 import * as requests from './requests';
 
-const RestaurantContainer = (props) => {
+const RestaurantContainer = () => {
   const [restaurant, setRestaurant] = useState(null);
 
   const params = useParams();

@@ -10,8 +10,7 @@ const restaurantsURL = 'http://localhost:4000/restaurants';
 const commentsURL = 'http://localhost:4000/comments';
 const usersURL = 'http://localhost:4000/users';
 
-export const fetchComments = (id) =>
-  fetch(restaurantsURL + `/comments` + `/${id}`);
+export const fetchComments = (id) => fetch(restaurantsURL + `/comments/${id}`);
 export const fetchOneRest = (id) => fetch(restaurantsURL + `/${id}`);
 export const fetchRestaurants = () => fetch(restaurantsURL);
 export const fetchUser = (email) => fetch(usersURL + `/login?q=${email}`);

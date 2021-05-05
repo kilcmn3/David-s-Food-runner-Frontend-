@@ -26,6 +26,7 @@ const ReviewListContainer = (props) => {
       .fetchComments(params.id)
       .then((response) => response.json())
       .then((datas) => setComments(datas));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSubmit = (event) => {
