@@ -34,16 +34,16 @@ Live Demo: https://david-s-food-runner.herokuapp.com/
 
 # Known Bugs
 
-- New user, if password is not followed guideline, the alret message show as 'Someone using that email'
-- pagination: if list of items are more than 30 and hit back (ex. going from page 2 to page 1) it shows the very last of list.
-- Search, when search a keyword it also return result with non related result as well.
+- (fixed)New user, if password is not followed guideline, the alret message show as 'Someone using that email'
+- (fixed)pagination: if list of items are more than 30 and hit back (ex. going from page 2 to page 1) it shows the very last of list.
+- (fixed)Search, when search a keyword it also return result with non related result as well.
 
 # Improvements
 
-- Sign up should be easy and understandable for a new user.
-- Search results should list by closet distance.
-- User can make favorite restaurants list(current the functionality is not avaliable).
-- User token after login(Instead of setting toke to localStorage.. should be better way to handle it.).
+- [v]Sign up should be easy and understandable for a new user.
+- [v]Search results should list by closet distance.
+- [v]User can make favorite restaurants list(current the functionality is not avaliable).
+- [v]User token after login(Instead of setting toke to localStorage.. should be better way to handle it.).
 
 ---
 
